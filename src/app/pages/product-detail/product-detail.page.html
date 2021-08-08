@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Product Detail</ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="cart-btn" fill="clear" slot="icon-only" (click)="cart()">
+        <ion-icon class="font-24" name="cart"></ion-icon>
+        <ion-badge *ngIf="cartProducts && cartProducts.length > 0">
+          <ion-text color="primary">{{cartProducts.length}}</ion-text>
+        </ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="data" class="all-center">
+    <img class="product_image all-center ion-padding-top" src="../../../assets/{{data.image}}" />
+    <h5 class="ion-padding-vertical all-center">
+      <ion-text color="primary">{{data.name}}</ion-text>
+    </h5>
+    <p class="all-center" color="secondary">Author: {{data.manufacturer | titlecase}}</p>
+    <p class="all-center" color="secondary">Availability: {{data.stock_status}}</p>
+    <h4 class="ion-padding-top all-center"><span class="mrp_price">${{data.price}} </span>${{data.special}}</h4>
+    <ion-card>
+      <h5 class="ion-text-center">
+        <ion-text color="primary">SUMMARY</ion-text>
+      </h5>
+      <ion-card-content class="ion-no-padding ion-padding-horizontal ion-padding-bottom">
+        <p class="ion-text-wrap ion-text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ac
+          feugiat diam. Cras imperdiet diam sem, sed consectetur ante pharetra ut. Duis elementum ullamcorper quam.
+          Suspendisse id posuere felis. Pellentesque at nisi blandit, tincidunt purus a, congue purus. Curabitur sodales
+          velit lectus, eget Proin in nulla id elit euismod Duis vitae fringilla velit</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-row class="all-center ion-padding-horizontal flip-button" onclick="this.classList.toggle('hover');">
+    <ion-button *ngIf="showAddToCart" expand="block" fill="outline" class="icon icon-right ion-chevron-right front"
+      (click)="updateCart(data, 'add')">Add To Cart</ion-button>
+    <ion-button *ngIf="!showAddToCart" expand="block" fill="solid" class="button-balanced back"
+      (click)="updateCart(data, 'remove')">Remove</ion-button>
+  </ion-row>
+</ion-content>

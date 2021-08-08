@@ -1,0 +1,11 @@
+.profile-header {
+  background: var(--ion-color-primary);
+  background-image: linear-gradient(var(--ion-color-primary-tint), var(--ion-color-primary-shade));
+  height: 45vw;
+  img {
+    height: 30vw;
+    width: 30vw;
+    border-radius: 50%;
+    border: 2px solid var(--ion-color-white);
+  }
+}

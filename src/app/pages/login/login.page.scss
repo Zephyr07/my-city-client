@@ -1,0 +1,19 @@
+ion-segment {
+  background: var(--ion-color-tertiary);
+  border-radius: 0px !important;
+  ion-segment-button {
+    --border-radius: 0px !important;
+  }
+}
+ion-content {
+  --background: var(--ion-color-secondary);
+  background-size: 100% 100%;
+  ion-item {
+    --background: var(--ion-color-secondary);
+    border: 1px solid var(--ion-color-light);
+    ion-input {
+      color: var(--ion-color-white);
+      font-weight: 500;
+    }
+  }
+}

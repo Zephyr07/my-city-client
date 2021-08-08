@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Place Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-header no-border>
+    <div class="border"></div>
+    <ion-row class="checkmark ion-text-center">
+      <ion-col>
+        <ion-icon class="check1" color="secondary" name="checkmark-circle"></ion-icon>
+        <p>Address</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon class="check1" color="secondary" name="checkmark-circle"></ion-icon>
+        <p>Options</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon class="check1" color="secondary" name="checkmark-circle-outline"></ion-icon>
+        <p>Order</p>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-padding-horizontal couponRow">
+      <ion-col size="9">
+        <ion-input class="ion-padding-start" placeholder="Enter Discount Coupon"></ion-input>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button class="ion-float-right" expand="full" fill="solid" color="tertiary" (click)="applyCoupon()">APPLY
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-header>
+  <ion-list *ngIf="method1 && method2">
+    <ion-list-header color="light">Cart Details</ion-list-header>
+    <ion-item>
+      <ion-label>
+        <h2> Sub total </h2>
+      </ion-label>
+      <p> ${{totalCartAmount}} </p>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2> Extend Free Shipping </h2>
+      </ion-label>
+      <p> ${{shippingCharge}} </p>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <h2> Gross Total </h2>
+      </ion-label>
+      <p> ${{totalAmount}} </p>
+    </ion-item>
+
+    <ion-list-header color="light">Choose Payment Method</ion-list-header>
+    <ion-radio-group value="1">
+      <ion-item *ngIf="method1 != ''">
+        <ion-label>
+          <h4>{{method1.title}}</h4>
+        </ion-label>
+        <ion-radio slot="end" mode="md" value="1"></ion-radio>
+      </ion-item>
+      <ion-item *ngIf="method2 != ''">
+        <ion-label>
+          <h4>{{method2.title}}</h4>
+        </ion-label>
+        <ion-radio slot="end" mode="md" value="2"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="tertiary">
+    <ion-row>
+      <ion-col class="ion-padding-start amountCol">
+        <span> Total: ${{totalAmount}} </span>
+      </ion-col>
+      <ion-col (click)="placeOrder()">
+        <ion-button class="ion-float-right" fill="clear" color="white" size="small"><b>PLACE ORDER <ion-icon
+              name="chevron-forward-outline"></ion-icon></b></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

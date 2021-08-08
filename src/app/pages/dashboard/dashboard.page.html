@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <img src="../../../assets/img/logo.png" />
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill="clear" (click)="search()">
+                <ion-icon class="font-24" name="search"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-slides pager [options]="slideOptsOne">
+        <ion-slide *ngFor="let slider of mainSlider">
+            <img src="../../../assets/img/banners/{{slider.banner_image}}">
+        </ion-slide>
+    </ion-slides>
+    <div class="container ion-padding-right paddingTop_8">
+        <div class="scroll" scrollX="true">
+            <div class="catScroll" *ngFor="let i of typeEntreprises"
+                (click)="entreprisesListing(i.nom, i.id)">
+                <img src="{{i.image}}" width="55">
+                <p>{{i.nom | titlecase}}</p>
+            </div>
+        </div>
+    </div>
+    <ion-row class="bannerRow">
+        <ion-col size="6">
+            <img (click)="productListing('Grocery', 652)" src="../../../assets/img/banners/ads1.jpg" />
+        </ion-col>
+        <ion-col size="6">
+            <img (click)="productListing('Personal Care', 1573)" src="../../../assets/img/banners/ads2.jpg" />
+        </ion-col>
+        <ion-col size="12">
+            <img (click)="productListing('Households', 505)" src="../../../assets/img/banners/ads4.png" />
+        </ion-col>
+        <ion-col size="12">
+            <img (click)="productListing('Households', 505)" src="../../../assets/img/banners/ads3.jpg" />
+        </ion-col>
+        <ion-col size="12">
+            <img (click)="productListing('Imported ', 505)" src="../../../assets/img/banners/ads5.png" />
+        </ion-col>
+    </ion-row>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="cart()">
+        <ion-fab-button>
+            <img src="../../../assets/img/cart.svg" />
+            <ion-badge *ngIf="cartProducts && cartProducts.length > 0">
+                <ion-text color="primary">{{cartProducts.length}}</ion-text>
+            </ion-badge>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

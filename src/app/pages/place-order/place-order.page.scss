@@ -1,0 +1,40 @@
+.border {
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid var(--ion-color-light);
+  padding-top: 30px;
+}
+
+.checkmark {
+  margin: 10px 8vw;
+  .check1 {
+    font-size: 3em;
+    background: var(--ion-color-white);
+    color: var(--ion-color-primary);
+    margin-left: 8px;
+  }
+}
+
+ion-list-header {
+  font-size: 16px;
+  padding-bottom: 16px;
+}
+
+.couponRow {
+  border-top: 1px solid var(--ion-color-medium);
+  padding-top: 6px;
+  padding-bottom: 6px;
+  ion-input {
+    border: 1px solid var(--ion-color-medium);
+  }
+  ion-button {
+    height: 11vw;
+    margin: 0;
+  }
+}
+
+ion-footer {
+  .amountCol span {
+    line-height: 2;
+  }
+}

@@ -1,0 +1,36 @@
+.noProduct {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  .cartIcon {
+    font-size: 15vw;
+  }
+}
+
+ion-item {
+  padding-top: 8px;
+  ion-thumbnail {
+    height: auto;
+    width: 21vw;
+    img {
+      height: auto;
+    }
+  }
+  .trashIcon {
+    border: 1px solid var(--ion-color-primary);
+    border-radius: 25%;
+    padding: 2px;
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  p {
+    line-height: 1;
+  }
+  .iconRow {
+    margin-right: 8px;
+    font-size: 24px;
+  }
+}

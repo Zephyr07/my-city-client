@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button defaultHref="/" text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contentBG">
+  <form [formGroup]="signupForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3" class="ion-no-padding">
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-label>
+                  <ion-icon name="person" color="light"></ion-icon>
+                </ion-label>
+                <ion-input type="text" placeholder="First Name" [formControl]="signupForm.controls['first_name']">
+                </ion-input>
+              </ion-item>
+              <p class="ion-no-margin invalidMessage"
+                *ngIf="!signupForm.controls.first_name.valid && !signupForm.controls.first_name.pending && (signupForm.controls.first_name.dirty || submitAttempt)">
+                First name is required.</p>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-label>
+                  <ion-icon name="person" color="light"></ion-icon>
+                </ion-label>
+                <ion-input type="text" placeholder="Last Name" [formControl]="signupForm.controls['last_name']">
+                </ion-input>
+              </ion-item>
+              <p class="ion-no-margin invalidMessage"
+                *ngIf="!signupForm.controls.last_name.valid && !signupForm.controls.last_name.pending && (signupForm.controls.last_name.dirty || submitAttempt)">
+                Last name is required.</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3" class="ion-no-padding">
+          <ion-row>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-label>
+                  <ion-icon name="call" color="light"></ion-icon>
+                </ion-label>
+                <ion-input type="tel" placeholder="Phone" minlength="10" maxlength="10"
+                  [formControl]="signupForm.controls['phone']"></ion-input>
+              </ion-item>
+              <p class="ion-no-margin invalidMessage"
+                *ngIf="!signupForm.controls.phone.valid && !signupForm.controls.phone.pending && (signupForm.controls.phone.dirty || submitAttempt)">
+                Min length is 10 numeric characters</p>
+            </ion-col>
+            <ion-col>
+              <ion-item lines="none">
+                <ion-label>
+                  <ion-icon name="location" color="light"></ion-icon>
+                </ion-label>
+                <ion-input type="tel" placeholder="Zip Code" [formControl]="signupForm.controls['zip_code']">
+                </ion-input>
+              </ion-item>
+              <p class="ion-no-margin invalidMessage"
+                *ngIf="!signupForm.controls.zip_code.valid && !signupForm.controls.zip_code.pending && (signupForm.controls.zip_code.dirty || submitAttempt)">
+                Min length is 5 numeric characters</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+          <ion-item lines="none">
+            <ion-label style="overflow: visible;"><ion-icon name="location" color="light"></ion-icon></ion-label>
+            <ion-select placeholder="Select Country" [formControl]="signupForm.controls['country']">
+              <ion-label>Select Country</ion-label>
+              <ion-select-option *ngFor="let country of countries" [value]="country.name" selected>
+                {{country.name}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <p class="ion-no-margin invalidMessage"
+            *ngIf="!signupForm.controls.country.valid && !signupForm.controls.country.pending && (signupForm.controls.country.dirty || submitAttempt)">
+            Country is required</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="location" color="light"></ion-icon>
+            </ion-label>
+            <ion-input type="text" placeholder="Location" [(ngModel)]="location" (click)="selectLocation()"
+              [formControl]="signupForm.controls['location']" readonly></ion-input>
+          </ion-item>
+          <p class="ion-no-margin invalidMessage"
+            *ngIf="!signupForm.controls.location.valid && !signupForm.controls.location.pending && (signupForm.controls.location.dirty || submitAttempt)">
+            Location is required</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="mail" color="light"></ion-icon>
+            </ion-label>
+            <ion-input type="email" placeholder="Email" [formControl]="signupForm.controls['email']"></ion-input>
+          </ion-item>
+          <p class="ion-no-margin invalidMessage"
+            *ngIf="!signupForm.controls.email.valid && !signupForm.controls.email.pending && (signupForm.controls.email.dirty || submitAttempt)">
+            Email is required.</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="lock-closed" color="light"></ion-icon>
+            </ion-label>
+            <ion-input type="password" placeholder="Password" ngModel name="password" clearOnEdit="false"
+              [formControl]="signupForm.controls['password']"></ion-input>
+          </ion-item>
+          <p class="ion-no-margin invalidMessage"
+            *ngIf="!signupForm.controls.password.valid && !signupForm.controls.password.pending && (signupForm.controls.password.dirty || submitAttempt)">
+            Min. length is 8 alphanumeric characters.</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-xl="6" offset-xl="3">
+          <ion-item lines="none">
+            <ion-label>
+              <ion-icon name="lock-closed" color="light"></ion-icon>
+            </ion-label>
+            <ion-input type="password" placeholder="Confirm Password" clearOnEdit="false"
+              [formControl]="signupForm.controls['confirm_password']"></ion-input>
+          </ion-item>
+          <p class="ion-no-margin invalidMessage"
+            *ngIf="!signupForm.controls.confirm_password.valid && !signupForm.controls.confirm_password.pending && (signupForm.controls.confirm_password.dirty || submitAttempt)">
+            Min. length is 8 alphanumeric characters.</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="tertiary" (click)="register()" [disabled]="!signupForm.valid" shape="round">
+            Register
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

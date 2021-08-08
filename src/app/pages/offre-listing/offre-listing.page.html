@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="sous_categories" (click)="openSousCategories()">
+      <ion-text class="ion-text-wrap">{{sous_categories.nom | titlecase}}</ion-text>
+    </ion-title>
+  </ion-toolbar>
+
+
+  <ion-segment color="primary" [(ngModel)]="activeTab" (ionChange)="tabChanged($event)">
+    <ion-segment-button value="all">
+      Tout
+    </ion-segment-button>
+    <ion-segment-button value="new">
+      Plus récent
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-list>
+      <ion-item *ngFor="let offre of allOffres; let i=index" class="producteItem" (click)="openOffrePrix(offre.nom, offre.id)">
+        <ion-thumbnail slot="start">
+          <img [src]="offre.image" (load)="offre.loaded = true" [hidden]="!offre.loaded" />
+          <img src="../../../assets/img/no-image.jpg" [hidden]="offre.loaded">
+        </ion-thumbnail>
+        <ion-label>
+          <h2 class="ion-text-wrap">{{offre.nom}}</h2>
+          <p>{{offre.description}}</p>
+          <p>Type: {{offre.type}}</p>
+          <p>Note : {{offre.notes | limitTo : 3}} <ion-icon name="star"></ion-icon></p>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="allOffres.length == 0">Aucune offre disponible.</ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,28 @@
+.border {
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid var(--ion-color-light);
+  padding-top: 30px;
+}
+
+.checkmark {
+  margin: 10px 30px;
+  ion-col {
+    margin-left: 8px;
+    .check1 {
+      font-size: 3em;
+      background: var(--ion-color-white);
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+ion-list {
+  border-top: 2px solid var(--ion-color-light);
+}
+
+ion-footer {
+  .amountCol span {
+    line-height: 2;
+  }
+}

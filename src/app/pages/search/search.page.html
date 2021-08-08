@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Search</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()">
+        <ion-icon class="font-24" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-searchbar [formControl]="searchControl" (ionChange)="onSearchInput()"></ion-searchbar>
+
+</ion-header>
+
+<ion-content>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="searchTerm !='' && searchCategory.length > 0">
+    <h5 class="ion-padding-start">Search Result</h5>
+    <ion-item *ngFor="let category of searchCategory" (click)="goToProducts(category)">
+      {{ category.title | titlecase}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <h5 class="ion-padding-start">Popular Search</h5>
+    <ion-item *ngFor="let category of categories" (click)="goToProducts(category)">
+      {{ category.title | titlecase}}
+    </ion-item>
+  </ion-list>
+
+</ion-content>

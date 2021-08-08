@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Orders List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let order of ordersList" routerLink="/order-detail">
+    <ion-card-content class="ion-no-padding ion-padding-vertical">
+      <ion-grid>
+        <ion-row class="ion-text-center">
+          <ion-col size="5"><b>Date</b></ion-col>
+          <ion-col><b>Status</b></ion-col>
+          <ion-col><b>Total</b></ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center">
+          <ion-col size="5">{{order.date_added}}</ion-col>
+          <ion-col>
+            <ion-text color="{{order.color}}">{{order.status}}</ion-text>
+          </ion-col>
+          <ion-col>{{order.total}}</ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

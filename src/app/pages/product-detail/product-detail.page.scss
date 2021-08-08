@@ -1,0 +1,17 @@
+.product_image {
+  max-height: 75vw;
+}
+
+ion-badge {
+  border-radius: 50%;
+  background: var(--ion-color-white);
+  margin-bottom: 12px;
+  height: 20px;
+  padding-right: 8px;
+}
+
+.mrp_price {
+  text-decoration: line-through;
+  font-size: 15px;
+  padding-right: 8px;
+}

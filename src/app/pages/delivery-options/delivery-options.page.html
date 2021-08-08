@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Delivery Options</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-header no-border>
+        <div class="border"></div>
+        <ion-row class="checkmark ion-text-center">
+            <ion-col>
+                <ion-icon class="check1" color="secondary" name="checkmark-circle"></ion-icon>
+                <p>Address</p>
+            </ion-col>
+            <ion-col>
+                <ion-icon class="check1" color="secondary" name="checkmark-circle-outline"></ion-icon>
+                <p>Options</p>
+            </ion-col>
+            <ion-col>
+                <ion-icon class="check1" color="medium" name="checkmark-circle-outline"></ion-icon>
+                <p>Order</p>
+            </ion-col>
+        </ion-row>
+    </ion-header>
+    <ion-list *ngIf="method1 && method2">
+        <ion-list-header color="light">Choose Shipping Method</ion-list-header>
+        <ion-radio-group value={{method1.cost}} (ionChange)="shippingMethod($event)">
+            <ion-item *ngIf="method1.code != ''">
+                <ion-label>
+                    <h4><b class="ion-padding-end">${{method1.cost}} </b> {{method1.title}}</h4>
+                </ion-label>
+                <ion-radio slot="end" mode="md" value={{method1.cost}}></ion-radio>
+            </ion-item>
+            <ion-item *ngIf="method2.code != ''" lines="none">
+                <ion-label>
+                    <h4><b class="ion-padding-end">&nbsp; ${{method2.cost}} </b> {{method2.title}}</h4>
+                </ion-label>
+                <ion-radio slot="end" mode="md" value={{method2.cost}}></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+        <ion-list-header color="light">Delivery</ion-list-header>
+        <div class="ion-padding">
+            <ion-item>
+                <ion-label>Date</ion-label>
+                <ion-datetime [(ngModel)]="todayDate" [min]="todayDate" [max]="maxYear"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>Time</ion-label>
+                <ion-select class="timeSlots" value="1" placeholder="Select time slot">
+                    <ion-select-option value="1">09:00 AM - 11:00 AM</ion-select-option>
+                    <ion-select-option value="2">11:00 AM - 01:00 PM</ion-select-option>
+                    <ion-select-option value="3">04:00 PM - 06:00 PM</ion-select-option>
+                    <ion-select-option value="4">06:00 PM - 08:00PM</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </div>
+    </ion-list>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-toolbar color="tertiary">
+        <ion-row>
+            <ion-col class="ion-padding-start amountCol">
+                <span> Total: ${{totalAmount}} </span>
+            </ion-col>
+            <ion-col (click)="continue()">
+                <ion-button class="ion-float-right" fill="clear" color="white" size="small"><b>CONTINUE <ion-icon
+                            name="chevron-forward-outline"></ion-icon></b></ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

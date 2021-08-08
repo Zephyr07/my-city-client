@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="typeEntreprise" (click)="openTypeEntreprises()">
+      <ion-text class="ion-text-wrap">{{typeEntreprise.nom | titlecase}}</ion-text>
+    </ion-title>
+  </ion-toolbar>
+
+
+  <ion-segment color="primary" [(ngModel)]="activeTab" (ionChange)="tabChanged($event)">
+    <ion-segment-button value="all">
+      Toutes
+    </ion-segment-button>
+    <ion-segment-button value="new">
+      Plus récent
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+
+  <div>
+    <ion-list>
+      <ion-item *ngFor="let product of allEntreprises; let i=index" class="productItem">
+        <ion-thumbnail slot="start">
+          <img [src]="product.logo" (load)="product.loaded = true" [hidden]="!product.loaded" />
+          <img src="../../../assets/img/no-image.jpg" [hidden]="product.loaded">
+        </ion-thumbnail>
+        <ion-label>
+          <h2 class="ion-text-wrap">{{product.nom}}</h2>
+          <p>{{product.a_propos}}</p>
+          <p>
+            <span *ngFor="let loc of product.localisations">
+              {{loc.quartier}},
+            </span>
+          </p>
+          <p>Note: {{product.notes | limitTo : 3}} <ion-icon name="star"></ion-icon></p>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="allEntreprises.length == 0">Aucune entreprise.</ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

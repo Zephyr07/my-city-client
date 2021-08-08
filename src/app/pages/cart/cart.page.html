@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Shopping Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngIf="cartProducts && cartProducts.length>0; else noProduct">
+    <ion-item *ngFor="let product of cartProducts">
+      <ion-thumbnail size="3" slot="start" (click)="productDetail(product.product_id)">
+        <img [src]="'../../../assets/' + product.image" (load)="product.loaded = true" [hidden]="!product.loaded" />
+        <img src="../../../assets/img/no-image.jpg" [hidden]="product.loaded">
+      </ion-thumbnail>
+      <ion-label size="9">
+        <h2 class="ion-text-wrap">{{product.name | titlecase}}</h2>
+        <p class="ion-text-wrap">{{product.manufacturer}}</p>
+        <p class="ion-text-wrap">Product Code:{{product.model}}</p>
+        <h4>{{product.cartQuantity}} x $<span [innerHTML]="product.special_formated"></span></h4>
+
+        <ion-icon class="iconRow ion-padding-top ion-float-left" color="primary" name="remove-circle-outline" slot="end"
+          (click)="updateQty(product,'less')"></ion-icon>
+        <p class="iconRow ion-padding-top ion-float-left" slot="end"> {{product.cartQuantity}} </p>
+        <ion-icon class="iconRow ion-padding-top ion-float-left" color="primary" slot="end" name="add-circle-outline"
+          (click)="updateQty(product,'add')"></ion-icon>
+        <ion-icon color="primary" class="trashIcon ion-float-right" name="trash" (click)="removeProduct(product)">
+        </ion-icon>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ng-template class="all-center" #noProduct>
+    <div class="noProduct">
+      <ion-icon color="medium" name="cart" class="cartIcon"></ion-icon>
+      <p>
+        <ion-text color="medium">There are no items in your cart. Enjoy great shopping experience with us!</ion-text>
+      </p>
+      <ion-button color="secondary" routerLink="/dashboard" routerLinkActive="inactive">
+        <ion-text color="white">Start Shopping</ion-text>
+      </ion-button>
+    </div>
+
+  </ng-template>
+
+</ion-content>
+
+<ion-footer class="ion-no-border" *ngIf="cartProducts.length > 0">
+  <ion-toolbar color="tertiary">
+    <ion-row>
+      <ion-col class="ion-padding-start">
+        <ion-label>
+          <p color="white"> {{cartProducts.length}} {{cartProducts.length == 1 ? 'item' : 'items'}} </p>
+          <p> ${{totalCartAmount}} </p>
+        </ion-label>
+      </ion-col>
+      <ion-col (click)="goToDeliveryAddress()">
+        <ion-button fill="clear" color="light" size="small" class="ion-float-right">CHECKOUT <ion-icon
+            name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

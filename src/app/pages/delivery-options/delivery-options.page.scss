@@ -1,0 +1,33 @@
+.border {
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid var(--ion-color-light);
+  padding-top: 8vw;
+}
+
+.checkmark {
+  margin: 10px 30px;
+  ion-col {
+    margin-left: 8px;
+    .check1 {
+      font-size: 3em;
+      background: var(--ion-color-white);
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+ion-list-header {
+  font-size: 16px;
+  padding-bottom: 16px;
+}
+
+.timeSlots {
+  max-width: 68%;
+}
+
+ion-footer {
+  .amountCol span {
+    line-height: 2;
+  }
+}

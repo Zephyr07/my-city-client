@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Choose Location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center allCenter ion-padding-top">
+  <ion-row class="ion-padding-top">
+    <ion-col>
+      <ion-icon color="primary" class="locationIcon" name="location"></ion-icon>
+      <p>
+        <ion-text color="medium">Your Current Location:</ion-text>
+      </p>
+      <p>{{locationResult}}</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-top">
+    <ion-col size="10" class="all-center">
+      <ion-button expand="block" (click)="onFindLocation()" color="secondary">Use Current Address</ion-button>
+    </ion-col>
+    <ion-col size="10" class="all-center">
+      <ion-button expand="block" (click)="onAddressModal()" color="medium">Select Location Manually</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

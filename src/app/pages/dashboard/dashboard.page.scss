@@ -1,0 +1,64 @@
+div[scrollx="true"] {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-item {
+    flex: 0 0 auto;
+  }
+  div {
+    padding: 5px;
+    ion-thumbnail {
+      width: 33vw;
+      min-height: 48vw;
+      img {
+        border-radius: 2vw;
+        box-shadow: var(--ion-color-light-shade) 1px 1px;
+      }
+    }
+  }
+}
+h5 {
+  a {
+    text-decoration: none;
+  }
+  ion-note {
+    font-size: 15px;
+    padding-top: 1px;
+  }
+}
+
+ion-badge {
+  background: var(--ion-color-white);
+  height: 6vw;
+  position: absolute;
+  bottom: 3vw;
+}
+
+.catScroll {
+  border-left: var(--ion-color-medium) 0.1px solid;
+  height: auto;
+  box-shadow: none;
+  padding: 10px;
+  line-height: 1.5em;
+  min-width: 100px;
+  text-align: center;
+  background: var(--ion-color-light);
+  p {
+    margin: 0px;
+    padding: 0px;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    text-transform: capitalize;
+    color: var(--ion-color-black);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.bannerRow {
+  padding: 8px;
+}

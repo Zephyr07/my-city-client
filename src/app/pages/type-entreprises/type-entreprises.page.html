@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Types d'entreprises</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()">
+        <ion-icon class="font-24" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let cat of typeEntreprises" (click)="dismiss(cat)">
+      <ion-label>{{cat.nom | titlecase}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

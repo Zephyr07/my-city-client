@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button defaultHref="/" text="" color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+  <ion-segment color="primary" class="menu" [(ngModel)]="activeTab">
+    <ion-segment-button value="login">
+      LOGIN
+    </ion-segment-button>
+    <ion-segment-button value="reset">
+      RESET PASSWORD
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="activeTab">
+    <form [formGroup]="loginForm" *ngSwitchCase="'login'" ngSelected="selected" class="ion-padding-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-xl="6" offset-xl="3">
+            <ion-item lines="none">
+              <ion-label>
+                <ion-icon name="mail" color="light"></ion-icon>
+              </ion-label>
+              <ion-input type="email" placeholder="Email" [formControl]="loginForm.controls['email']"></ion-input>
+            </ion-item>
+            <p class="ion-no-margin invalidMessage"
+              *ngIf="!loginForm.controls.email.valid && !loginForm.controls.email.pending && (loginForm.controls.email.dirty || submitAttempt)">
+              Email is required.</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-xl="6" offset-xl="3">
+            <ion-item lines="none">
+              <ion-label>
+                <ion-icon name="lock-closed" color="light"></ion-icon>
+              </ion-label>
+              <ion-input type="password" placeholder="Password" clearOnEdit="false"
+                [formControl]="loginForm.controls['password']"></ion-input>
+            </ion-item>
+            <p class="ion-no-margin invalidMessage"
+              *ngIf="!loginForm.controls.password.valid && !loginForm.controls.password.pending && (loginForm.controls.password.dirty || submitAttempt)">
+              Min. length is 8 alphanumeric characters.</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="tertiary" shape="round" (click)="login()" [disabled]="!loginForm.valid">
+              Login
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+
+    <form [formGroup]="resetForm" *ngSwitchCase="'reset'" class="ion-padding-top">
+      <ion-grid>
+        <ion-row>
+          <ion-col size-xl="6" offset-xl="3">
+            <ion-item lines="none">
+              <ion-label>
+                <ion-icon name="mail" color="light"></ion-icon>
+              </ion-label>
+              <ion-input type="email" placeholder="Email" [formControl]="resetForm.controls['email']"></ion-input>
+            </ion-item>
+            <p class="ion-no-margin invalidMessage"
+              *ngIf="!resetForm.controls.email.valid && !resetForm.controls.email.pending && (resetForm.controls.email.dirty || submitAttempt)">
+              Email is required.</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block" color="tertiary" shape="round" (click)="reset()" [disabled]="!resetForm.valid">
+              Reset
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

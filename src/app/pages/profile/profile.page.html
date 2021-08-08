@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+  <div class="profile-header ion-text-center">
+    <img src="../assets/img/default-avatar.png" class="ion-margin-top" />
+    <p class="ion-no-margin">
+      <ion-text color="white">OpenSource Technologies</ion-text>
+    </p>
+  </div>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="updateForm" class="ion-padding-top">
+    <ion-item class="ion-padding-horizontal">
+      <ion-input type="text" placeholder="Name" [formControl]="updateForm.controls['name']"></ion-input>
+    </ion-item>
+    <p class="ion-no-margin invalidMessage"
+      *ngIf="!updateForm.controls.name.valid && !updateForm.controls.name.pending && updateForm.controls.name.dirty">
+      Name is required</p>
+    <ion-item class="ion-padding-horizontal">
+      <ion-input type="email" placeholder="Email" [formControl]="updateForm.controls['email']"></ion-input>
+    </ion-item>
+    <p class="ion-no-margin invalidMessage"
+      *ngIf="!updateForm.controls.email.valid && !updateForm.controls.email.pending && updateForm.controls.email.dirty">
+      Invalid email</p>
+    <ion-item class="ion-padding-horizontal">
+      <ion-input type="text" placeholder="City" [formControl]="updateForm.controls['city']"></ion-input>
+    </ion-item>
+    <p class="ion-no-margin invalidMessage"
+      *ngIf="!updateForm.controls.city.valid && !updateForm.controls.city.pending && updateForm.controls.city.dirty">
+      City is required</p>
+    <ion-item class="ion-padding-horizontal">
+      <ion-input type="number" placeholder="Mobile" [formControl]="updateForm.controls['mobile']"></ion-input>
+    </ion-item>
+    <p class="ion-no-margin invalidMessage"
+      *ngIf="!updateForm.controls.mobile.valid && !updateForm.controls.mobile.pending && updateForm.controls.mobile.dirty">
+      Invalid Mobile</p>
+    <ion-row class="ion-padding">
+      <ion-col size="12">
+        <ion-button expand="full" color="tertiary" shape="round" [disabled]="!updateForm.valid" (click)="update()">
+          <b>Update</b></ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
