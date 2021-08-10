@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 import {ApiService} from "../../services/api.service";
 import {LoadingController, ModalController} from "@ionic/angular";
 import {CategoriesPage} from "../categories/categories.page";
@@ -44,9 +44,6 @@ export class EntrepriseListingPage implements OnInit {
                 console.log(this.typeEntreprise);
             }
 
-
-
-
         });
         this.activeTab = 'all';
         // this.getProducts();
@@ -54,9 +51,6 @@ export class EntrepriseListingPage implements OnInit {
 
     }
 
-    ionViewWillEnter() {
-        this.cartProducts = window.localStorage.getItem('cartProducts') ? JSON.parse(window.localStorage.getItem('cartProducts')) : [];
-    }
 
     ngOnInit() {
     }
@@ -93,7 +87,8 @@ export class EntrepriseListingPage implements OnInit {
         loading.present();
 
         const opt = {
-            type_entreprises_id: this.typeEntreprise.id,
+            //type_entreprises_id: this.typeEntreprise.id,
+            type_entreprises_id: 1,
             should_paginate: false,
             _includes: 'localisations.villes,note_entreprises.notes',
             statut : 'active'
@@ -122,5 +117,10 @@ export class EntrepriseListingPage implements OnInit {
             console.log('erreur chargement', q);
             loading.dismiss();
         });
+    }
+
+    async openEntrepriseDetail(p) {
+        const navigationExtra: NavigationExtras = {state: {entreprise: {id: p.id}}};
+        this.router.navigateByUrl('entreprise-detail', navigationExtra);
     }
 }

@@ -13,9 +13,9 @@
     <h5 class="ion-padding-vertical all-center">
       <ion-text color="primary">{{offre.nom}}</ion-text>
     </h5>
-    <p class="all-center" color="secondary">Type: {{offre.type | titlecase}}</p>
     <p class="all-center" color="secondary">Vendeur: {{prix.entreprises.nom | titlecase}}</p>
-      <h4 class="ion-padding-top all-center"><span class="mrp_price">{{this.prix.valeur | priceFormat}} FCFA </span></h4>
+      <h4 class="ion-padding-top all-center"><span class="mrp_price">{{prix.valeur | priceFormat}} FCFA </span></h4>
+      <h4 class="ion-padding-top all-center"><span class="mrp_price">{{offre.notes | limitTo : 3}} <ion-icon name="star"></ion-icon> </span></h4>
     <ion-card>
       <h5 class="ion-text-center">
         <ion-text color="primary">Description</ion-text>

@@ -8,6 +8,7 @@ import { OffreDetailPageRoutingModule } from './offre-detail-routing.module';
 
 import { OffreDetailPage } from './offre-detail.page';
 import {PriceFormatPipe} from "../../pipe/price-format";
+import {LimitToPipe} from "../../pipe/limit-to";
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import {PriceFormatPipe} from "../../pipe/price-format";
     IonicModule,
     OffreDetailPageRoutingModule
   ],
-  declarations: [OffreDetailPage, PriceFormatPipe]
+  declarations: [OffreDetailPage, PriceFormatPipe, LimitToPipe]
 })
 export class OffreDetailPageModule {}

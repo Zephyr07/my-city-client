@@ -118,6 +118,10 @@ const routes: Routes = [
   {
     path: 'offre-prix',
     loadChildren: () => import('./pages/offre-prix/offre-prix.module').then( m => m.OffrePrixPageModule)
+  },
+  {
+    path: 'entreprise-detail',
+    loadChildren: () => import('./pages/entreprise-detail/entreprise-detail.module').then( m => m.EntrepriseDetailPageModule)
   }
 ];
 

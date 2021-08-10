@@ -30,9 +30,19 @@ export class OffreDetailPage implements OnInit {
     }
 
     async getOffreById(id) {
-        this.api.Offres.get(id).subscribe(d => {
-            console.log(d);
-            this.offre = d.body;
+        this.api.Offres.get(id, {_includes: 'note_offres.notes'}).subscribe(d => {
+            const data = d.body;
+            let sumNote = 0;
+            data.note_offres.forEach(v => {
+                if (v.notes.valeur === undefined) {
+                    v.notes.valeur = 0;
+                }
+                sumNote += v.notes.valeur;
+            });
+            if (data.note_offres.length !== 0) {
+                data.notes = sumNote / data.note_offres.length;
+            }
+            this.offre = data;
         });
     }
 

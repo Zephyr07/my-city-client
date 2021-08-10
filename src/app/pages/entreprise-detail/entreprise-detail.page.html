@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="entreprise" class="all-center">
+    <img class="product_image all-center ion-padding-top" src="{{entreprise.logo}}" width="100%" height="200px" />
+    <h5 class="ion-padding-vertical all-center">
+      <ion-text color="primary">{{entreprise.nom}}</ion-text>
+    </h5>
+    <p class="all-center" color="secondary">Type: {{entreprise.type_entreprises.nom | titlecase}}</p>
+    <h4 class="ion-padding-top all-center"><span class="mrp_price"> {{entreprise.notes | limitTo : 3}} <ion-icon name="star"></ion-icon> </span></h4>
+    <ion-card>
+      <h5 class="ion-text-center">
+        <ion-text color="primary">A propos</ion-text>
+      </h5>
+      <ion-card-content class="ion-no-padding ion-padding-horizontal ion-padding-bottom">
+        {{entreprise.a_propos}}
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <h5 class="ion-text-center">
+        <ion-text color="primary">Localisation</ion-text>
+      </h5>
+      <ion-card-content class="ion-no-padding ion-padding-horizontal ion-padding-bottom">
+        <ion-list>
+          <ion-item *ngFor="let l of entreprise.localisations">
+            <ion-label>
+              <h2>{{l.quartier}}</h2>
+              <h3>{{l.information_supplementaire}}</h3>
+              <p>{{l.villes.nom}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <h5 class="ion-text-center">
+        <ion-text color="primary">Offres</ion-text>
+      </h5>
+      <ion-card-content class="ion-no-padding ion-padding-horizontal ion-padding-bottom">
+        <ion-item *ngFor="let o of entreprise.prix_offres" (click)="openOffreDetail(o)">
+          <ion-avatar slot="start">
+            <img [src]="o.offres.image">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{o.offres.nom}}</h2>
+            <h3>{{o.offres.type}}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

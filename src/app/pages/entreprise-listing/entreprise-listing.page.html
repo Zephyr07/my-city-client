@@ -23,7 +23,7 @@
 
   <div>
     <ion-list>
-      <ion-item *ngFor="let product of allEntreprises; let i=index" class="productItem">
+      <ion-item *ngFor="let product of allEntreprises; let i=index" class="productItem" (click)="openEntrepriseDetail(product)">
         <ion-thumbnail slot="start">
           <img [src]="product.logo" (load)="product.loaded = true" [hidden]="!product.loaded" />
           <img src="../../../assets/img/no-image.jpg" [hidden]="product.loaded">
