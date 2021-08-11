@@ -31,22 +31,36 @@
         </div>
     </div>
     <ion-row class="bannerRow">
-        <ion-col size="6">
-            <img (click)="productListing('Grocery', 652)" src="../../../assets/img/banners/ads1.jpg" />
-        </ion-col>
-        <ion-col size="6">
-            <img (click)="productListing('Personal Care', 1573)" src="../../../assets/img/banners/ads2.jpg" />
+        <ion-col size="12">
+            <h5 class="titre">Promotions</h5>
         </ion-col>
         <ion-col size="12">
-            <img (click)="productListing('Households', 505)" src="../../../assets/img/banners/ads4.png" />
+            <ion-slides pager [options]="slideOptsOne" >
+                <ion-slide *ngFor="let p of promotions">
+                    <img class="image-slide" [src]="p.image">
+                </ion-slide>
+            </ion-slides>
         </ion-col>
-        <ion-col size="12">
-            <img (click)="productListing('Households', 505)" src="../../../assets/img/banners/ads3.jpg" />
+        <ion-col class="ion-text-right" (click)="promotionsLinsting()">
+            <ion-button size="small" color="warning">Toutes les promos</ion-button>
         </ion-col>
+
+    </ion-row>
+
+    <ion-row class="bannerRow">
         <ion-col size="12">
-            <img (click)="productListing('Imported ', 505)" src="../../../assets/img/banners/ads5.png" />
+            <h5 class="titre">Marques</h5>
+        </ion-col>
+        <ion-col size="6" *ngFor="let m of marques">
+            <ion-card style="margin : 5px !important;">
+                <img (click)="productListing('Grocery', 652)" [src]="m.image" />
+            </ion-card>
+        </ion-col>
+        <ion-col class="ion-text-right">
+            <ion-button size="small" color="warning">Toutes les marques</ion-button>
         </ion-col>
     </ion-row>
+
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="cart()">
         <ion-fab-button>
             <img src="../../../assets/img/cart.svg" />

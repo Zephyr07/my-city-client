@@ -15,8 +15,15 @@ export class DashboardPage implements OnInit {
 
   private mainSlider: any = [];
   private cartProducts: any = [];
-  private categories: any = [];
+  private marques: any = [];
+  private promotions: any = [];
   private typeEntreprises: any = [];
+  public slideOptsOne = {
+      initialSlide: 0,
+      slidesPerView: 1,
+      speed : 2000,
+      autoplay: true
+  };
   constructor(
     private apiService: ApiService,
     private api: ApiProvider,
@@ -27,7 +34,8 @@ export class DashboardPage implements OnInit {
   ) {
     this.menu.enable(true, 'custom');
     this.getBanners();
-    this.getCategories();
+    this.getMarques();
+    this.getPromotions();
     this.getTypeEntreprises();
   }
 
@@ -51,10 +59,31 @@ export class DashboardPage implements OnInit {
       });
   }
 
-  getCategories() {
-    this.apiService.getCategories().then((result: any) => {
-      this.categories = result.data;
-      //console.log('this.categories', this.categories[0]);
+  getMarques(){
+    const opt = {
+      should_paginate : true,
+      per_page: 4,
+      statut : 'active',
+      _sort: 'nom',
+      _sortDir: 'asc'
+    };
+    this.api.Marques.getList(opt).subscribe(d => {
+      console.log(d);
+      this.marques = d;
+    });
+  }
+
+  getPromotions(){
+    const opt = {
+      should_paginate : true,
+      per_page: 4,
+      statut : 'active',
+      _sort: 'priorite',
+      _sortDir: 'desc'
+    };
+    this.api.Promotions.getList(opt).subscribe(d => {
+      console.log(d);
+      this.promotions = d;
     });
   }
 
@@ -68,9 +97,12 @@ export class DashboardPage implements OnInit {
   }
 
   entreprisesListing(title, id) {
-      console.log(title);
     const navigationExtra: NavigationExtras = { state: { type_entreprise: { title: title, id: id} } }
     this.router.navigateByUrl('entreprise-listing', navigationExtra);
+  }
+
+  promotionsLinsting() {
+    this.router.navigateByUrl('promotion-listing');
   }
 
   async search() {
@@ -81,11 +113,5 @@ export class DashboardPage implements OnInit {
 
     return await modal.present();
   }
-
-  slideOptsOne = {
-    initialSlide: 0,
-    slidesPerView: 1,
-    autoplay: true
-  };
 
 }

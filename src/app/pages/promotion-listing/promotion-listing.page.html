@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text class="ion-text-wrap">Promotions</ion-text>
+    </ion-title>
+  </ion-toolbar>
+
+
+  <ion-segment color="primary" [(ngModel)]="activeTab" (ionChange)="tabChanged($event)">
+    <ion-segment-button value="all">
+      Toutes
+    </ion-segment-button>
+    <ion-segment-button value="new">
+      Plus récentes
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let p of promotions; let i=index">
+    <img [src]="p.image" alt="">
+    <ion-card-header>
+      <ion-card-subtitle>du {{p.date_debut | dateFormat : false}} au {{p.date_fin | dateFormat}}</ion-card-subtitle>
+      <ion-card-title>{{p.titre}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{p.description}}.
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

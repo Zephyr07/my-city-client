@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { ModalController } from '@ionic/angular';
+import {MenuController, ModalController} from '@ionic/angular';
 import {ApiProvider} from "../../providers/api/api";
+import {Router} from "@angular/router";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-categories',
@@ -10,9 +12,12 @@ import {ApiProvider} from "../../providers/api/api";
 })
 export class CategoriesPage implements OnInit {
   private categories: any = [];
+  private selectedMenu = 0;
   constructor(
     private api: ApiProvider,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private router: Router,
+    private menuCtrl: MenuController
   ) {
     this.getCategories();
   }

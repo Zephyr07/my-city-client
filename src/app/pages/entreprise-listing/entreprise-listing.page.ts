@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
-import {ApiService} from "../../services/api.service";
-import {LoadingController, ModalController} from "@ionic/angular";
-import {CategoriesPage} from "../categories/categories.page";
-import {FiltersPage} from "../filters/filters.page";
-import {SortingPage} from "../sorting/sorting.page";
-import {ApiProvider} from "../../providers/api/api";
-import * as _ from "lodash";
-import {TypeEntreprisesPage} from "../type-entreprises/type-entreprises.page";
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {ApiService} from '../../services/api.service';
+import {LoadingController, ModalController} from '@ionic/angular';
+import {ApiProvider} from '../../providers/api/api';
+import * as _ from 'lodash';
+import {TypeEntreprisesPage} from '../type-entreprises/type-entreprises.page';
 
 @Component({
   selector: 'app-entreprise-listing',
@@ -17,16 +14,8 @@ import {TypeEntreprisesPage} from "../type-entreprises/type-entreprises.page";
 export class EntrepriseListingPage implements OnInit {
 
     private typeEntreprise: any;
-    private allProducts: any = [];
     private allEntreprises: any = [];
-    private noteEntreprises: any = [];
-    private newProducts: any = [];
     private activeTab: any;
-    private cartProducts: any = [];
-    private badge: boolean = false;
-    private showAddToCart: boolean;
-    private hoverAdded: any;
-    defaultImage: string = "../../../assets/img/no-image.jpg";
     constructor(
         public route: ActivatedRoute,
         public router: Router,
@@ -38,8 +27,8 @@ export class EntrepriseListingPage implements OnInit {
         this.route.queryParams.subscribe(params => {
             if (this.router.getCurrentNavigation().extras.state) {
                 this.typeEntreprise = this.router.getCurrentNavigation().extras.state.type_entreprise;
-                let encoded = this.typeEntreprise.title;
-                let decoded = encoded.replace(/&amp;/g, '&');
+                const encoded = this.typeEntreprise.title;
+                const decoded = encoded.replace(/&amp;/g, '&');
                 this.typeEntreprise.nom = decoded;
                 console.log(this.typeEntreprise);
             }
@@ -64,8 +53,9 @@ export class EntrepriseListingPage implements OnInit {
 
         modal.onDidDismiss()
             .then((data) => {
-                if (data.role !== undefined)
+                if (data.role !== undefined) {
                     this.typeEntreprise = data.role;
+                }
                 this.getEntreprisesByType();
             });
         return await modal.present();
@@ -87,8 +77,8 @@ export class EntrepriseListingPage implements OnInit {
         loading.present();
 
         const opt = {
-            //type_entreprises_id: this.typeEntreprise.id,
-            type_entreprises_id: 1,
+            type_entreprises_id: this.typeEntreprise.id,
+            // type_entreprises_id: 1,
             should_paginate: false,
             _includes: 'localisations.villes,note_entreprises.notes',
             statut : 'active'

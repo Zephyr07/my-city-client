@@ -14,8 +14,11 @@ export class ApiProvider {
 
   public Categories: any = this.restangular.service('categories');
   public Entreprises: any = this.restangular.service('entreprises');
+  public Marques: any = this.restangular.service('marques');
   public Offres: any = this.restangular.service('offres');
+  public Promotions: any = this.restangular.service('promotions');
   public TypeEntreprises: any = this.restangular.service('type_entreprises');
+  public Villes: any = this.restangular.service('villes');
   public me: any = this.restangular.one('auth/me');
 
   public date_format = 'Y-M-D';
