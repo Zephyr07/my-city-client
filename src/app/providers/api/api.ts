@@ -12,11 +12,15 @@ declare var Metro;
 @Injectable()
 export class ApiProvider {
 
+  public Abonnements: any = this.restangular.service('abonnements');
   public Categories: any = this.restangular.service('categories');
+  public Clients: any = this.restangular.service('clients');
   public Entreprises: any = this.restangular.service('entreprises');
   public Marques: any = this.restangular.service('marques');
   public Offres: any = this.restangular.service('offres');
+  public Paiements: any = this.restangular.service('paiements');
   public Promotions: any = this.restangular.service('promotions');
+  public TypeAbonnements: any = this.restangular.service('type_abonnements');
   public TypeEntreprises: any = this.restangular.service('type_entreprises');
   public Villes: any = this.restangular.service('villes');
   public me: any = this.restangular.one('auth/me');

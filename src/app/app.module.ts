@@ -20,6 +20,8 @@ import {PriceFormatPipe} from "./pipe/price-format";
 import {StatutPipe} from "./pipe/status";
 import {FilterPipe} from "./pipe/filter.pipe";
 import {LimitToPipe} from "./pipe/limit-to";
+import {AuthProvider} from "./providers/auth/auth";
+import {NgxPermissionsModule} from "ngx-permissions";
 
 export function RestangularConfigFactory(RestangularProvider) {
     RestangularProvider
@@ -73,6 +75,7 @@ export function RestangularConfigFactory(RestangularProvider) {
     BrowserModule,
     IonicModule.forRoot({mode: 'ios'}),
     RestangularModule.forRoot(RestangularConfigFactory),
+    NgxPermissionsModule.forRoot(),
     AppRoutingModule,
     HttpClientModule
   ],
@@ -81,6 +84,7 @@ export function RestangularConfigFactory(RestangularProvider) {
     SplashScreen,
     NativeGeocoder,
     ApiProvider,
+    AuthProvider,
     Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

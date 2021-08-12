@@ -126,6 +126,10 @@ const routes: Routes = [
   {
     path: 'promotion-listing',
     loadChildren: () => import('./pages/promotion-listing/promotion-listing.module').then( m => m.PromotionListingPageModule)
+  },
+  {
+    path: 'abonnement',
+    loadChildren: () => import('./pages/abonnement/abonnement.module').then( m => m.AbonnementPageModule)
   }
 ];
 

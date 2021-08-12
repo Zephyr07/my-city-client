@@ -3,16 +3,16 @@
     <ion-buttons>
       <ion-back-button defaultHref="/" text="" color="light"></ion-back-button>
     </ion-buttons>
-    <ion-title>Login</ion-title>
+    <ion-title>Connexion</ion-title>
   </ion-toolbar>
-  <ion-segment color="primary" class="menu" [(ngModel)]="activeTab">
+  <!--ion-segment color="primary" class="menu" [(ngModel)]="activeTab">
     <ion-segment-button value="login">
-      LOGIN
+      Connexion
     </ion-segment-button>
     <ion-segment-button value="reset">
-      RESET PASSWORD
+      Mot de passe oublié
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment-->
 </ion-header>
 
 <ion-content>
@@ -29,7 +29,7 @@
             </ion-item>
             <p class="ion-no-margin invalidMessage"
               *ngIf="!loginForm.controls.email.valid && !loginForm.controls.email.pending && (loginForm.controls.email.dirty || submitAttempt)">
-              Email is required.</p>
+              Email requis.</p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -38,18 +38,18 @@
               <ion-label>
                 <ion-icon name="lock-closed" color="light"></ion-icon>
               </ion-label>
-              <ion-input type="password" placeholder="Password" clearOnEdit="false"
+              <ion-input type="password" placeholder="Mot de passe" clearOnEdit="false"
                 [formControl]="loginForm.controls['password']"></ion-input>
             </ion-item>
             <p class="ion-no-margin invalidMessage"
               *ngIf="!loginForm.controls.password.valid && !loginForm.controls.password.pending && (loginForm.controls.password.dirty || submitAttempt)">
-              Min. length is 8 alphanumeric characters.</p>
+              Le mot de passe doivent comporter au moins 8 caractères et doivent contenir un chiffre, un caractère et un caractère spécial.</p>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-button expand="block" color="tertiary" shape="round" (click)="login()" [disabled]="!loginForm.valid">
-              Login
+              Connexion
             </ion-button>
           </ion-col>
         </ion-row>
@@ -68,13 +68,13 @@
             </ion-item>
             <p class="ion-no-margin invalidMessage"
               *ngIf="!resetForm.controls.email.valid && !resetForm.controls.email.pending && (resetForm.controls.email.dirty || submitAttempt)">
-              Email is required.</p>
+              Email requis.</p>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-button expand="block" color="tertiary" shape="round" (click)="reset()" [disabled]="!resetForm.valid">
-              Reset
+              Reinitialiser
             </ion-button>
           </ion-col>
         </ion-row>

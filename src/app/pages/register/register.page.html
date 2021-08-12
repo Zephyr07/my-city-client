@@ -55,17 +55,15 @@
       <ion-row>
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
-            <ion-label style="overflow: visible;"><ion-icon name="location" color="light"></ion-icon></ion-label>
-            <ion-select placeholder="Selectionner une ville" okText="Valider" cancelText="Annuler" [formControl]="signupForm.controls['location']">
-              <ion-label>Ville</ion-label>
-              <ion-select-option *ngFor="let v of villes" [value]="v.id" selected>
-                {{v.nom}}
-              </ion-select-option>
+            <ion-label style="overflow: visible;"><ion-icon name="male-female-outline" color="light"></ion-icon></ion-label>
+            <ion-select placeholder="Genre" interface="popover" [formControl]="signupForm.controls['genre']">
+              <ion-select-option value="Femme">Femme</ion-select-option>
+              <ion-select-option value="Homme">Homme</ion-select-option>
             </ion-select>
           </ion-item>
           <p class="ion-no-margin invalidMessage"
-             *ngIf="!signupForm.controls.location.valid && !signupForm.controls.location.pending && (signupForm.controls.location.dirty || submitAttempt)">
-            Ville requise</p>
+             *ngIf="!signupForm.controls.genre.valid && !signupForm.controls.genre.pending && (signupForm.controls.genre.dirty || submitAttempt)">
+            Sexe requis</p>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -107,11 +105,16 @@
           <p class="ion-no-margin invalidMessage"
             *ngIf="!signupForm.controls.confirm_password.valid && !signupForm.controls.confirm_password.pending && (signupForm.controls.confirm_password.dirty || submitAttempt)">
             Le mot de passe doivent comporter au moins 8 caractères et doivent contenir un chiffre, un caractère et un caractère spécial</p>
+          <p  class="ion-no-margin invalidMessage"
+              *ngIf="signupForm.controls.confirm_password.value!= '' && signupForm.controls.confirm_password.value != signupForm.controls.password.value">
+            Les mots de passes sont différents
+          </p>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button expand="block" color="tertiary" (click)="register()" [disabled]="!signupForm.valid" shape="round">
+          <ion-button expand="block" color="tertiary" (click)="register()"
+                      [disabled]="!signupForm.valid || (signupForm.controls.confirm_password.value!= '' && signupForm.controls.confirm_password.value != signupForm.controls.password.value)" shape="round">
             Créer mon compte
           </ion-button>
         </ion-col>

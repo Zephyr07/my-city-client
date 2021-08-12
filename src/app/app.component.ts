@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ApiService } from './services/api.service';
 import { Router, NavigationExtras } from '@angular/router';
 import {ApiProvider} from "./providers/api/api";
+import {AuthProvider} from "./providers/auth/auth";
 
 @Component({
   selector: 'app-root',
@@ -17,28 +18,21 @@ export class AppComponent implements OnInit {
   private isUserEnabled:boolean = false;
   private isCatMenu:boolean=true;
   private categories:any;
+  private client = {
+    nom: ''
+  };
   private selectedMenu: any;
 
   public appPages = [
     {
-      title: 'Home',
+      title: 'Acceuil',
       url: '/dashboard',
       icon: 'home-outline'
     },
     {
-      title: 'Profile',
+      title: 'Mon compte',
       url: '/profile',
       icon: 'person-outline'
-    },
-    {
-      title: 'Change Password',
-      url: '/change-password',
-      icon: 'lock-closed-outline'
-    },
-    {
-      title: 'Orders',
-      url: '/orders-listing',
-      icon: 'cart-outline'
     }
   ];
 
@@ -49,6 +43,7 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private apiService: ApiService,
+    private auth: AuthProvider,
     private api: ApiProvider,
     private menuCtrl: MenuController,
     private router: Router
@@ -70,6 +65,12 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
     this.getCategories();
+    // Recuperation du client
+    this.auth.getContext().then(d => {
+      this.client = JSON.parse(d).clients;
+    }, e => {
+      console.log(e);
+    });
   }
 
   profile(){
@@ -125,7 +126,9 @@ export class AppComponent implements OnInit {
    }
 
    logout(){
-    this.router.navigate(['/iniscreen'], { replaceUrl: true });
+    this.auth.logout().then(d => {
+      this.router.navigate(['/iniscreen'], { replaceUrl: true });
+    });
    }
 
 }

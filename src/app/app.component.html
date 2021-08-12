@@ -11,7 +11,7 @@
                   <img src="../assets/img/default-avatar.png" />
                 </ion-avatar>
                 
-                <p class="all-center ion-padding-top"><ion-text color="light">sales@opensourcetechnologies.com</ion-text></p>   
+                <p class="all-center ion-padding-top"><ion-text color="light">{{client.nom}}</ion-text></p>
         </ion-header>
         <ion-content>
   
@@ -25,7 +25,7 @@
                   </ion-item>
                   <ion-item (click)="logout()" lines="none">
                           <ion-icon color="secondary" slot="start" name="log-out-outline"></ion-icon>
-                          <ion-label>Logout</ion-label>
+                          <ion-label>Deconnexion</ion-label>
                     </ion-item>
                 </ion-menu-toggle>
               </ion-list>
@@ -65,7 +65,7 @@
         </ion-content>
         <!-- Company Footer -->
         <ion-footer>
-            <p class="ion-text-center"><ion-text color="secondary">&copy; 2020 OpenSource Technologies</ion-text></p>
+            <p class="ion-text-center"><ion-text color="secondary">&copy; 2021 Dynamics</ion-text></p>
         </ion-footer>
   
       </ion-menu>
