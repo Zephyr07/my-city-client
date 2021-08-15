@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text class="ion-text-wrap">Marques</ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-row class="bannerRow">
+      <ion-col size="6" *ngFor="let m of marques">
+        <ion-card style="margin : 5px !important;" (click)="openOffreByMarque(m.id, m.nom)">
+          <img [src]="m.image" />
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

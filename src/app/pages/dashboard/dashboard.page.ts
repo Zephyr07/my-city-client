@@ -50,7 +50,7 @@ export class DashboardPage implements OnInit {
   getBanners() {
     this.apiService.getDashboardBanners().then((result: any) => {
       this.mainSlider = result.appbanners.slider;
-    })
+    });
   }
 
   getTypeEntreprises(){
@@ -68,7 +68,6 @@ export class DashboardPage implements OnInit {
       _sortDir: 'asc'
     };
     this.api.Marques.getList(opt).subscribe(d => {
-      console.log(d);
       this.marques = d;
     });
   }
@@ -82,7 +81,6 @@ export class DashboardPage implements OnInit {
       _sortDir: 'desc'
     };
     this.api.Promotions.getList(opt).subscribe(d => {
-      console.log(d);
       this.promotions = d;
     });
   }
@@ -92,12 +90,21 @@ export class DashboardPage implements OnInit {
   }
 
   productListing(title, total) {
-    const navigationExtra: NavigationExtras = { state: { category: { title: title, total: total } } }
+    const navigationExtra: NavigationExtras = { state: { category: { title, total } } };
     this.router.navigateByUrl('products-listing', navigationExtra);
   }
 
+  marqueListing() {
+    this.router.navigateByUrl('marques-listing');
+  }
+
+  openOffreByMarque(id, nom){
+    const navigationExtra: NavigationExtras = { state: { marque: { id, nom} } };
+    this.router.navigateByUrl('offre-listing', navigationExtra);
+  }
+
   entreprisesListing(title, id) {
-    const navigationExtra: NavigationExtras = { state: { type_entreprise: { title: title, id: id} } }
+    const navigationExtra: NavigationExtras = { state: { type_entreprise: { title, id} } };
     this.router.navigateByUrl('entreprise-listing', navigationExtra);
   }
 

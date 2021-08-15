@@ -3,47 +3,58 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Profile</ion-title>
+    <ion-title>Mon compte</ion-title>
   </ion-toolbar>
   <div class="profile-header ion-text-center">
     <img src="../assets/img/default-avatar.png" class="ion-margin-top" />
     <p class="ion-no-margin">
-      <ion-text color="white">OpenSource Technologies</ion-text>
+      <ion-text color="white">{{nom}}</ion-text>
     </p>
   </div>
+  <ion-segment color="primary" [(ngModel)]="activeTab" (ionChange)="tabChanged($event)">
+    <ion-segment-button value="info">
+      Mes informations
+    </ion-segment-button>
+    <ion-segment-button value="contribution">
+      Mes contributions
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="updateForm" class="ion-padding-top">
-    <ion-item class="ion-padding-horizontal">
-      <ion-input type="text" placeholder="Name" [formControl]="updateForm.controls['name']"></ion-input>
-    </ion-item>
-    <p class="ion-no-margin invalidMessage"
-      *ngIf="!updateForm.controls.name.valid && !updateForm.controls.name.pending && updateForm.controls.name.dirty">
-      Name is required</p>
-    <ion-item class="ion-padding-horizontal">
-      <ion-input type="email" placeholder="Email" [formControl]="updateForm.controls['email']"></ion-input>
-    </ion-item>
-    <p class="ion-no-margin invalidMessage"
-      *ngIf="!updateForm.controls.email.valid && !updateForm.controls.email.pending && updateForm.controls.email.dirty">
-      Invalid email</p>
-    <ion-item class="ion-padding-horizontal">
-      <ion-input type="text" placeholder="City" [formControl]="updateForm.controls['city']"></ion-input>
-    </ion-item>
-    <p class="ion-no-margin invalidMessage"
-      *ngIf="!updateForm.controls.city.valid && !updateForm.controls.city.pending && updateForm.controls.city.dirty">
-      City is required</p>
-    <ion-item class="ion-padding-horizontal">
-      <ion-input type="number" placeholder="Mobile" [formControl]="updateForm.controls['mobile']"></ion-input>
-    </ion-item>
-    <p class="ion-no-margin invalidMessage"
-      *ngIf="!updateForm.controls.mobile.valid && !updateForm.controls.mobile.pending && updateForm.controls.mobile.dirty">
-      Invalid Mobile</p>
-    <ion-row class="ion-padding">
-      <ion-col size="12">
-        <ion-button expand="full" color="tertiary" shape="round" [disabled]="!updateForm.valid" (click)="update()">
-          <b>Update</b></ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+  <div [ngSwitch]="activeTab">
+    <div *ngSwitchCase="'info'" ngSelected="selected">
+      <form [formGroup]="updateForm" class="ion-padding-top">
+        <ion-item class="ion-padding-horizontal">
+          <ion-input type="text" placeholder="Nom" [formControl]="updateForm.controls['nom']"></ion-input>
+        </ion-item>
+        <p class="ion-no-margin invalidMessage"
+           *ngIf="!updateForm.controls.nom.valid && !updateForm.controls.nom.pending && updateForm.controls.nom.dirty">
+          Nom requis</p>
+        <ion-item lines="none" class="ion-padding-horizontal">
+          <ion-select placeholder="Genre" interface="popover" [formControl]="updateForm.controls['genre']">
+            <ion-select-option value="Femme">Femme</ion-select-option>
+            <ion-select-option value="Homme">Homme</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <p class="ion-no-margin invalidMessage"
+           *ngIf="!updateForm.controls.telephone.valid && !updateForm.controls.telephone.pending && updateForm.controls.telephone.dirty">
+          Téléphone invalide</p>
+        <ion-item class="ion-padding-horizontal">
+          <ion-input type="number" placeholder="Téléphone" [formControl]="updateForm.controls['telephone']"></ion-input>
+        </ion-item>
+        <ion-row class="ion-padding">
+          <ion-col size="12">
+            <ion-button expand="full" color="tertiary" shape="round" [disabled]="!updateForm.valid" (click)="update()">
+              <b>Mettre à jour</b></ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'contribution'">
+
+    </div>
+  </div>
+
 </ion-content>

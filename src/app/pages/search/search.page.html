@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Search</ion-title>
+    <ion-title>Recherche</ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="dismiss()">
         <ion-icon class="font-24" name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar [formControl]="searchControl" (ionChange)="onSearchInput()"></ion-searchbar>
-
+  <ion-searchbar [(ngModel)]="searchTerm" [placeholder]="'Que recherchez-vous?'" (ionChange)="onSearchInput()"></ion-searchbar>
+  <p class="ion-text-center ion-no-margin">
+    <small *ngIf="searchTerm.length<3" style="color:#6a6a6a"> 3 caractères minimum</small>
+  </p>
 </ion-header>
 
 <ion-content>
@@ -16,17 +18,38 @@
     <ion-spinner></ion-spinner>
   </div>
 
-  <ion-list *ngIf="searchTerm !='' && searchCategory.length > 0">
-    <h5 class="ion-padding-start">Search Result</h5>
-    <ion-item *ngFor="let category of searchCategory" (click)="goToProducts(category)">
-      {{ category.title | titlecase}}
+  <ion-list *ngIf="offres.length > 0">
+    <ion-label>Offres</ion-label>
+    <ion-item *ngFor="let o of offres" (click)="openOffrePrix(o.nom, o.id)">
+      {{ o.nom | titlecase}}
     </ion-item>
   </ion-list>
 
-  <ion-list>
-    <h5 class="ion-padding-start">Popular Search</h5>
-    <ion-item *ngFor="let category of categories" (click)="goToProducts(category)">
-      {{ category.title | titlecase}}
+  <ion-list *ngIf="marques.length > 0">
+    <h5 class="ion-padding-start">Marques</h5>
+    <ion-item *ngFor="let o of marques" (click)="openOffreByMarque(o.id, o.nom)">
+      {{ o.nom | titlecase}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="sous_categories.length > 0">
+    <h5 class="ion-padding-start">Sous-catégories</h5>
+    <ion-item *ngFor="let o of sous_categories" (click)="openOffreBySousCategories(o)">
+      {{ o.nom | titlecase}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="entreprises.length > 0">
+    <h5 class="ion-padding-start">Entreprises</h5>
+    <ion-item *ngFor="let o of entreprises" (click)="openEntrepriseDetail(o)">
+      {{ o.nom | titlecase}}
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="type_entreprises.length > 0">
+    <h5 class="ion-padding-start">Type d'entreprise</h5>
+    <ion-item *ngFor="let o of type_entreprises" (click)="entreprisesListing(o.nom, o.id)">
+      {{ o.nom | titlecase}}
     </ion-item>
   </ion-list>
 

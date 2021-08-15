@@ -20,10 +20,12 @@ export class ApiProvider {
   public Offres: any = this.restangular.service('offres');
   public Paiements: any = this.restangular.service('paiements');
   public Promotions: any = this.restangular.service('promotions');
+  public SousCategories: any = this.restangular.service('sous_categories');
   public TypeAbonnements: any = this.restangular.service('type_abonnements');
   public TypeEntreprises: any = this.restangular.service('type_entreprises');
   public Villes: any = this.restangular.service('villes');
   public me: any = this.restangular.one('auth/me');
+  public BuyTicketUrl: any = this.restangular.service('buy_ticket/get_om_url');
 
   public date_format = 'Y-M-D';
 

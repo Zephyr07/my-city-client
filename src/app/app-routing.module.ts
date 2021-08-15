@@ -130,6 +130,10 @@ const routes: Routes = [
   {
     path: 'abonnement',
     loadChildren: () => import('./pages/abonnement/abonnement.module').then( m => m.AbonnementPageModule)
+  },
+  {
+    path: 'marques-listing',
+    loadChildren: () => import('./pages/marques-listing/marques-listing.module').then( m => m.MarquesListingPageModule)
   }
 ];
 

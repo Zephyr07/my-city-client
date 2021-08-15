@@ -6,7 +6,7 @@
         <ion-title>
             <img src="../../../assets/img/logo.png" />
         </ion-title>
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" hidden>
             <ion-button fill="clear" (click)="search()">
                 <ion-icon class="font-24" name="search"></ion-icon>
             </ion-button>
@@ -52,21 +52,18 @@
             <h5 class="titre">Marques</h5>
         </ion-col>
         <ion-col size="6" *ngFor="let m of marques">
-            <ion-card style="margin : 5px !important;">
-                <img (click)="productListing('Grocery', 652)" [src]="m.image" />
+            <ion-card style="margin : 5px !important;" (click)="openOffreByMarque(m.id, m.nom)">
+                <img [src]="m.image" />
             </ion-card>
         </ion-col>
         <ion-col class="ion-text-right">
-            <ion-button size="small" color="warning">Toutes les marques</ion-button>
+            <ion-button size="small" color="warning" (click)="marqueListing()">Toutes les marques</ion-button>
         </ion-col>
     </ion-row>
 
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="cart()">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="search()">
         <ion-fab-button>
-            <img src="../../../assets/img/cart.svg" />
-            <ion-badge *ngIf="cartProducts && cartProducts.length > 0">
-                <ion-text color="primary">{{cartProducts.length}}</ion-text>
-            </ion-badge>
+            <ion-icon name="search"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 </ion-content>

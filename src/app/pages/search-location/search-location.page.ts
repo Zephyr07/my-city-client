@@ -49,7 +49,7 @@ export class SearchLocationPage implements OnInit {
     this.GoogleAutocomplete.getPlacePredictions({
       input: this.autocomplete.query,
       componentRestrictions: {
-        country: 'usa'
+        country: 'camroon'
       }
     },
       (predictions, status) => {

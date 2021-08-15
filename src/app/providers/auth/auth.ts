@@ -41,7 +41,6 @@ export class AuthProvider {
     return new Promise((resolve, reject) => {
       this.api.restangular.all('auth/signup').post(credentials)
         .subscribe( (response) => {
-          console.log(response);
           const data = response.body;
           localStorage.setItem(this.token_key, data.token);
           localStorage.setItem('user', JSON.stringify(data.user));
@@ -105,16 +104,13 @@ export class AuthProvider {
       localStorage.removeItem('user');
       localStorage.removeItem('client');
       resolve(true);
-      // AclService.flushRoles();
-      // AclService.setAbilities({});
     });
   }
 
   getContext() {
     return   new Promise((resolve, reject) => {
       if (this.isLogged()) {
-        resolve(localStorage.getItem('user'));
-
+        resolve(JSON.parse(localStorage.getItem('user')));
       } else {
         reject('not logged');
       }

@@ -14,6 +14,7 @@ import * as _ from 'lodash';
 export class OffreListingPage implements OnInit {
 
     private sous_categories: any;
+    private marque: any;
     private allOffres: any = [];
     private activeTab: any;
     constructor(
@@ -26,15 +27,22 @@ export class OffreListingPage implements OnInit {
     ) {
         this.route.queryParams.subscribe(params => {
             if (this.router.getCurrentNavigation().extras.state) {
-                this.sous_categories = this.router.getCurrentNavigation().extras.state.sous_categories;
-                const encoded = this.sous_categories.nom;
-                const decoded = encoded.replace(/&amp;/g, '&');
-                this.sous_categories.nom = decoded;
+                const state = this.router.getCurrentNavigation().extras.state;
+                if (state.sous_categories){
+                    this.sous_categories = this.router.getCurrentNavigation().extras.state.sous_categories;
+                    const encoded = this.sous_categories.nom;
+                    const decoded = encoded.replace(/&amp;/g, '&');
+                    this.sous_categories.nom = decoded;
+                    this.getOffresBySousCategories();
+                } else if (state.marque) {
+                    this.getOffresByMarque(state.marque.id);
+                    const encoded = state.marque.nom;
+                    const decoded = encoded.replace(/&amp;/g, '&');
+                    this.marque = decoded;
+                }
             }
         });
         this.activeTab = 'all';
-        this.getOffresBySousCategories();
-
     }
 
     ngOnInit() {
@@ -84,7 +92,41 @@ export class OffreListingPage implements OnInit {
             statut : 'active'
         };
         this.api.Offres.getList(opt).subscribe( d => {
-            console.log('a', d);
+            d.forEach(offres => {
+              offres.loaded = false;
+              let sumNote = 0;
+              offres.notes = 0;
+              offres.note_offres.forEach(v => {
+                if (v.notes.valeur === undefined) {
+                    v.notes.valeur = 0;
+                }
+                sumNote += v.notes.valeur;
+              });
+              if (offres.note_offres.length !== 0) {
+                  offres.notes = sumNote / offres.note_offres.length;
+              }
+            });
+            this.allOffres = d;
+            loading.dismiss();
+        }, q => {
+            console.log('erreur chargement', q);
+            loading.dismiss();
+        });
+    }
+
+    async getOffresByMarque(id) {
+        const loading = await this.loadingCtrl.create({
+            message: 'Chargement...'
+        });
+        loading.present();
+
+        const opt = {
+            marque_id: id,
+            should_paginate: false,
+            _includes: 'prix_offres,note_offres.notes',
+            statut : 'active'
+        };
+        this.api.Offres.getList(opt).subscribe( d => {
             d.forEach(offres => {
               offres.loaded = false;
               let sumNote = 0;

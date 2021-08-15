@@ -6,6 +6,9 @@
     <ion-title *ngIf="sous_categories" (click)="openSousCategories()">
       <ion-text class="ion-text-wrap">{{sous_categories.nom | titlecase}}</ion-text>
     </ion-title>
+    <ion-title *ngIf="marque">
+      <ion-text class="ion-text-wrap">{{marque | titlecase}}</ion-text>
+    </ion-title>
   </ion-toolbar>
 
 
