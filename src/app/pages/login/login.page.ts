@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
         password : this.loginForm.value.password,
     };
 
-    this.auth.login(param).then(d => {
+    this.auth.login(param).then((d: any) => {
       // verification de l'abonnement de l'utilisateur
       const opt = {
         _includes : 'type_abonnements',

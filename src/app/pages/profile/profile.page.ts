@@ -51,9 +51,9 @@ export class ProfilePage implements OnInit {
           message: 'Chargement...'
       });
       loading.present();
-      this.auth.getContext().then(u => {
+      this.auth.getContext().then((u: any) => {
           this.user = u;
-          this.api.Clients.get(u.clients.id).subscribe(d => {
+          this.api.Clients.get(u.clients.id).subscribe((d: any) => {
               d = d.body;
               this.nom = d.nom;
               this.updateForm = this.formBuilder.group({

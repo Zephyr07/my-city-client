@@ -33,6 +33,7 @@ export class OffreDetailPage implements OnInit {
         this.api.Offres.get(id, {_includes: 'note_offres.notes,marques'}).subscribe(d => {
             const data = d.body;
             let sumNote = 0;
+            data.notes = 0;
             data.note_offres.forEach(v => {
                 if (v.notes.valeur === undefined) {
                     v.notes.valeur = 0;

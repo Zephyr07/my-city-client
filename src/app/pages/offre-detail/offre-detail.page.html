@@ -3,6 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button text=""></ion-back-button>
     </ion-buttons>
+    <ion-title>
+      Détails
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,14 +14,14 @@
   <div *ngIf="offre" class="all-center">
     <img class="product_image all-center ion-padding-top" src="{{offre.image}}" width="100%" height="200px" />
     <h5 class="ion-padding-vertical all-center">
-      <ion-text color="primary">{{offre.nom}}</ion-text>
+      <ion-text color="secondary">{{offre.nom}}</ion-text>
     </h5>
     <p class="all-center" color="secondary">Vendeur: {{prix.entreprises.nom | titlecase}}</p>
       <h4 class="ion-padding-top all-center"><span class="mrp_price">{{prix.valeur | priceFormat}} FCFA </span> | {{offre.marques.nom}}</h4>
       <h4 class="ion-padding-top all-center"><span class="mrp_price">{{offre.notes | limitTo : 3}} <ion-icon name="star"></ion-icon> </span></h4>
     <ion-card>
       <h5 class="ion-text-center">
-        <ion-text color="primary">Description</ion-text>
+        <ion-text color="secondary">Description</ion-text>
       </h5>
       <ion-card-content class="ion-no-padding ion-padding-horizontal ion-padding-bottom">
         <p class="ion-text-wrap ion-text-justify">{{offre.description}}</p>

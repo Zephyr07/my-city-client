@@ -18,8 +18,6 @@
           </ion-card-header>
           <ion-card-content>
               Selectionner un pack pour pouvoir acceder à l'application
-              <a href="https://secure.cleanpay.africa/payment/paylink/4DwG5Qy8c7qWw616%24cp611551e0c012f">payer</a>
-              <a href='https://secure.cleanpay.africa/payment/paylink/4DwG5Qy8c7qWw616%24cp611551e0c012f'><img style='max-width:300px;' src='https://secure.cleanpay.africa/assets/images/acheter.jpg' alt='Acheter' ></a>
           </ion-card-content>
       </ion-card>
       <ion-card *ngFor="let p of type_abonnements; let i=index">
@@ -30,8 +28,11 @@
           <ion-card-content>
               Accedez à toutes les informations de votre ville gratuitement pendant {{p.duree}} mois.
               <ion-row>
-                  <ion-col class="ion-text-right">
-                      <ion-button size="small" color="warning" (click)="acheterAbonnement(p)">Acheter</ion-button>
+                  <ion-col size="6" class="ion-text-center">
+                      <ion-button size="small" color="danger" (click)="alertOM(p)">Payer avec OM</ion-button>
+                  </ion-col>
+                  <ion-col size="6" class="ion-text-center">
+                      <ion-button size="small" color="warning" (click)="alertMoMo(p)">Payer avec MoMo</ion-button>
                   </ion-col>
               </ion-row>
           </ion-card-content>

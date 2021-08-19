@@ -35,6 +35,7 @@ export class EntrepriseDetailPage implements OnInit {
       this.api.Entreprises.get(id, opt).subscribe(d => {
         const data = d.body;
         let sumNote = 0;
+        data.notes = 0;
         data.note_entreprises.forEach(v => {
             if (v.notes.valeur === undefined) {
                 v.notes.valeur = 0;

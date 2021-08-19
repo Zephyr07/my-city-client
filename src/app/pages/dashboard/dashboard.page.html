@@ -4,7 +4,7 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
-            <img src="../../../assets/img/logo.png" />
+            <img src="../../../assets/img/lgo.png" />
         </ion-title>
         <ion-buttons slot="end" hidden>
             <ion-button fill="clear" (click)="search()">
@@ -16,12 +16,14 @@
 
 
 <ion-content>
-    <ion-slides pager [options]="slideOptsOne">
+    <!--ion-slides pager [options]="slideOptsOne">
         <ion-slide *ngFor="let slider of mainSlider">
             <img src="../../../assets/img/banners/{{slider.banner_image}}">
         </ion-slide>
-    </ion-slides>
-    <div class="container ion-padding-right paddingTop_8">
+    </ion-slides-->
+    <img src="../../../assets/image/pub_ici.jpg">
+    <!--div class="container ion-padding-right paddingTop_8"-->
+    <div class="container ion-padding-right" style="margin-top: -3px">
         <div class="scroll" scrollX="true">
             <div class="catScroll" *ngFor="let i of typeEntreprises"
                 (click)="entreprisesListing(i.nom, i.id)">
@@ -30,7 +32,7 @@
             </div>
         </div>
     </div>
-    <ion-row class="bannerRow">
+    <ion-row class="bannerRow" *ngIf="promotions.length>0">
         <ion-col size="12">
             <h5 class="titre">Promotions</h5>
         </ion-col>

@@ -5,8 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ApiService } from './services/api.service';
 import { Router, NavigationExtras } from '@angular/router';
-import {ApiProvider} from "./providers/api/api";
-import {AuthProvider} from "./providers/auth/auth";
+import {ApiProvider} from './providers/api/api';
+import {AuthProvider} from './providers/auth/auth';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +15,9 @@ import {AuthProvider} from "./providers/auth/auth";
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
-  private isUserEnabled:boolean = false;
-  private isCatMenu:boolean=true;
-  private categories:any;
+  private isUserEnabled = false;
+  private isCatMenu = true;
+  private categories: any;
   private client = {
     nom: ''
   };
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
     }
     this.getCategories();
     // Recuperation du client
-    this.auth.getContext().then(d => {
+    this.auth.getContext().then((d: any) => {
       this.client = JSON.parse(d).clients;
     }, e => {
       console.log(e);
@@ -74,8 +74,8 @@ export class AppComponent implements OnInit {
   }
 
   profile(){
-    if(this.isCatMenu || !this.isCatMenu)
-   {this.isCatMenu=!this.isCatMenu;}
+    if (this.isCatMenu || !this.isCatMenu)
+   {this.isCatMenu = !this.isCatMenu; }
   }
 
   getCategories(){
@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
       _includes: 'sous_categories'
     };
 
-    this.api.Categories.getList(opt).subscribe(d => {
+    this.api.Categories.getList(opt).subscribe((d: any) => {
       this.categories = d;
     }, err => {
         console.log(err);
@@ -101,16 +101,16 @@ export class AppComponent implements OnInit {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (page.component) {
-     
+
       this.router.navigate(page.component);
       this.menuCtrl.close();
     } else {
-      if (this.selectedMenu==index) {
+      if (this.selectedMenu === index) {
         this.selectedMenu = -1;
-       
+
       } else {
         this.selectedMenu = index;
-       
+
       }
     }
   }

@@ -77,11 +77,11 @@ export class RegisterPage implements OnInit {
       telephone : this.signupForm.value.phone,
       genre : this.signupForm.value.genre,
     };
-    this.auth.register(user).then(rep => {
-      this.api.TypeAbonnements.getList({duree: 1}).subscribe(d => {
+    this.auth.register(user).then((rep: any) => {
+      this.api.TypeAbonnements.getList({duree: 1}).subscribe((d: any) => {
         // paiement 0
-        this.api.Paiements.post({montant: 0, mode_paiement: 'inscription', code_transaction: rep.user.id + 'tran' + d[0].id}).subscribe(p => {
-          this.api.Abonnements.post({user_id: rep.user.id, type_abonnements_id: d[0].id, paiements_id: p.body.id, statut: 'active'}).subscribe(da => {
+        this.api.Paiements.post({montant: 0, mode_paiement: 'inscription', code_transaction: rep.user.id + 'tran' + d[0].id}).subscribe((p: any) => {
+          this.api.Abonnements.post({user_id: rep.user.id, type_abonnements_id: d[0].id, paiements_id: p.body.id, statut: 'active'}).subscribe((da: any) => {
             // redirection vers la page d'abonnement
             loading.dismiss();
             this.router.navigate(['/dashboard'], { replaceUrl: true });
