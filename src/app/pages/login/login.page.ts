@@ -100,6 +100,9 @@ export class LoginPage implements OnInit {
           }
         }
       });
+    }, err => {
+      console.log(err);
+      loading.dismiss();
     });
 
   }

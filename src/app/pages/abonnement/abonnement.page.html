@@ -27,12 +27,17 @@
           </ion-card-header>
           <ion-card-content>
               Accedez à toutes les informations de votre ville gratuitement pendant {{p.duree}} mois.
+              <br>
+              Selectionner un mode de paiement
               <ion-row>
-                  <ion-col size="6" class="ion-text-center">
-                      <ion-button size="small" color="danger" (click)="alertOM(p)">Payer avec OM</ion-button>
+                  <ion-col size="4" class="ion-text-center">
+                      <ion-button size="small" color="success" (click)="alertMoMo('dohone',p)">Dohone</ion-button>
                   </ion-col>
-                  <ion-col size="6" class="ion-text-center">
-                      <ion-button size="small" color="warning" (click)="alertMoMo(p)">Payer avec MoMo</ion-button>
+                  <ion-col size="4" class="ion-text-center">
+                      <ion-button size="small" color="danger" (click)="alertOM(p)">OM</ion-button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                      <ion-button size="small" color="warning" (click)="alertMoMo('momo',p)">MoMo</ion-button>
                   </ion-col>
               </ion-row>
           </ion-card-content>

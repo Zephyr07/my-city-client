@@ -23,7 +23,7 @@
           <ion-col size-xl="6" offset-xl="3">
             <ion-item lines="none">
               <ion-label>
-                <ion-icon name="mail" color="light"></ion-icon>
+                <ion-icon name="mail" color="dark"></ion-icon>
               </ion-label>
               <ion-input type="email" placeholder="Email" [formControl]="loginForm.controls['email']"></ion-input>
             </ion-item>
@@ -36,7 +36,7 @@
           <ion-col size-xl="6" offset-xl="3">
             <ion-item lines="none">
               <ion-label>
-                <ion-icon name="lock-closed" color="light"></ion-icon>
+                <ion-icon name="lock-closed" color="dark"></ion-icon>
               </ion-label>
               <ion-input type="password" placeholder="Mot de passe" clearOnEdit="false"
                 [formControl]="loginForm.controls['password']"></ion-input>
@@ -48,7 +48,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button expand="block" color="tertiary" shape="round" (click)="login()" [disabled]="!loginForm.valid">
+            <ion-button expand="block" color="secondary" shape="round" (click)="login()" [disabled]="!loginForm.valid">
               Connexion
             </ion-button>
           </ion-col>

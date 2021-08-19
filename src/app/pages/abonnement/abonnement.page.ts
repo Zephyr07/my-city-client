@@ -12,6 +12,8 @@ import {HttpClient} from '@angular/common/http';
 export class AbonnementPage implements OnInit {
 
   private type_abonnements: any = [];
+  private url_dohone = 'https://www.my-dohone.com/dohone/';
+  private url_sandbox = 'https://www.my-dohone.com/dohone-sandbox/';
   private telephone = 0;
   private otp = 0;
   private client: any = {};
@@ -102,7 +104,7 @@ export class AbonnementPage implements OnInit {
         await alert.present();
     }
 
-    async alertMoMo(p) {
+    async alertMoMo(mode, p) {
         const alert = await this.alertController.create({
             cssClass: 'my-custom-class',
             header: 'Informations de paiement',
@@ -129,7 +131,7 @@ export class AbonnementPage implements OnInit {
                     handler: (d: any) => {
                         console.log('Confirm Ok');
                         this.telephone = d.telephone;
-                        this.payer('momo', p);
+                        this.payer(mode, p);
                     }
                 }
             ]
@@ -163,7 +165,7 @@ export class AbonnementPage implements OnInit {
                 handler: (d: any) => {
                     console.log('Confirm Ok');
                     this.telephone = d.telephone;
-                    this.payer('momo', p);
+                    this.confirmationVirement(d.code);
                 }
             }
         ]
@@ -174,17 +176,26 @@ export class AbonnementPage implements OnInit {
 
   payer(mode, abonnement: any){
     // initialisation de la commande DOHONE
-    const xxx = 'PE458Z7521';
+    const xxx = 'CZ216K29371047143059308';
     if (mode === 'om') {
-        this.http.get('https://www.my-dohone.com/dohone/pay?cmd=start&rN=' + this.client.nom + '&rDvs=XAF&rMt=' + abonnement.prix + '&rMo=2&rT=' + this.telephone
+        this.http.get(this.url_dohone + 'pay?cmd=start&rN=' + this.client.nom + '&rDvs=XAF&rMt=' + abonnement.prix + '&rMo=2&rT=' + this.telephone
             + '&rH=' + xxx + '&rI=' + abonnement.nom + '&source=Ma+Ville&rOTP' + this.otp)
             .subscribe((res: any) => {
                 console.log(res);
             }, err => {
                 console.log(err);
             });
-    } else { // MTN
-        this.http.get('https://www.my-dohone.com/dohone/pay?cmd=start&rN=' + this.client.nom + '&rDvs=XAF&rMt=0&rMo=1&rT=' + this.telephone
+    } else if (mode === 'momo') { // MTN
+        this.http.get(this.url_dohone + 'pay?cmd=start&rN=' + this.client.nom + '&rDvs=XAF&rMt=' + abonnement.prix + '&rMo=1&rT=' + this.telephone
+            + '&rH=' + xxx + '&rI=' + abonnement.nom + '&source=Ma+Ville')
+            .subscribe((res: any) => {
+                console.log(res);
+            }, err => {
+                console.log(err);
+                alert(err.error.text);
+            });
+    } else if (mode === 'dohone') { // MTN
+        this.http.get(this.url_sandbox + 'pay?cmd=start&rN=' + this.client.nom + '&rDvs=XAF&rMt=' + abonnement.prix + '&rMo=10&rT=' + this.telephone
             + '&rH=' + xxx + '&rI=' + abonnement.nom + '&source=Ma+Ville')
             .subscribe((res: any) => {
                 console.log(res);
@@ -202,6 +213,21 @@ export class AbonnementPage implements OnInit {
           }, err => {
               console.log(err);
               alert(err.error.text);
+          });
+  }
+    //https://www.my-dohone.com/dohone-sandbox/pay?cmd=cfrmsms&rCS=H1317&rT=682000316
+  confirmationVirement(code){
+      this.http.get(this.url_sandbox + 'pay?cmd=cfrmsms&rCS=' + code + '&rT=' + this.telephone)
+          .subscribe((res: any) => {
+              console.log(res);
+          }, err => {
+              console.log(err);
+              if (err.statusText === 'OK') {
+                  //
+              } else {
+                  // echec
+                  alert(err.error.text);
+              }
           });
   }
 }

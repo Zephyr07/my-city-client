@@ -14,7 +14,6 @@ export class IniscreenPage implements OnInit {
     private menu: MenuController
   ) {
     this.menu.enable(false, 'custom');
-    console.log(localStorage.getItem('client'));
   }
 
   ngOnInit() {
