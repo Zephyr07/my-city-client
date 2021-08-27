@@ -26,6 +26,7 @@ export class AbonnementPage implements OnInit {
   ) {
     this.getTypeAbonnements();
     this.auth.getContext().then((d: any) => {
+      console.log(d);
       this.client = JSON.parse(d).clients;
     }, e => {
       console.log(e);
@@ -140,7 +141,7 @@ export class AbonnementPage implements OnInit {
         await alert.present();
     }
 
-  async confirmation(p) {
+  async confirmation(abonnement) {
     const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'Code de confirmation',
@@ -164,8 +165,7 @@ export class AbonnementPage implements OnInit {
                 text: 'Valider',
                 handler: (d: any) => {
                     console.log('Confirm Ok');
-                    this.telephone = d.telephone;
-                    this.confirmationVirement(d.code);
+                    this.confirmationVirement(d.code, abonnement);
                 }
             }
         ]
@@ -184,6 +184,12 @@ export class AbonnementPage implements OnInit {
                 console.log(res);
             }, err => {
                 console.log(err);
+                if (err.statusText === 'OK') {
+                    this.creerPaiement(err.text, mode, abonnement);
+                } else {
+                    // echec
+                    alert('Echec dans le paiement, merci de reessayer');
+                }
             });
     } else if (mode === 'momo') { // MTN
         this.http.get(this.url_dohone + 'pay?cmd=start&rN=' + this.client.nom + '&rDvs=XAF&rMt=' + abonnement.prix + '&rMo=1&rT=' + this.telephone
@@ -192,18 +198,54 @@ export class AbonnementPage implements OnInit {
                 console.log(res);
             }, err => {
                 console.log(err);
-                alert(err.error.text);
+                if (err.statusText === 'OK') {
+                    this.creerPaiement(err.text, mode, abonnement);
+                } else {
+                    // echec
+                    alert('Echec dans le paiement, merci de reessayer');
+                }
             });
-    } else if (mode === 'dohone') { // MTN
+    } else if (mode === 'dohone') { // DOHONE
         this.http.get(this.url_sandbox + 'pay?cmd=start&rN=' + this.client.nom + '&rDvs=XAF&rMt=' + abonnement.prix + '&rMo=10&rT=' + this.telephone
             + '&rH=' + xxx + '&rI=' + abonnement.nom + '&source=Ma+Ville')
             .subscribe((res: any) => {
                 console.log(res);
             }, err => {
                 console.log(err);
-                alert(err.error.text);
+                if (err.statusText === 'OK') {
+                    // paiement en attente de validation
+                    this.confirmation(abonnement);
+                } else {
+                    // echec
+                    alert('Echec dans le paiement, merci de reessayer');
+                }
             });
     }
+  }
+
+  creerPaiement(code_transaction, mode_paiement, abonnement){
+      const opt = {
+          code_transaction,
+          mode_paiement,
+          montant : abonnement.montant,
+          statut: 'accepted'
+      };
+      this.api.Paiements.post(opt).subscribe((d: any) => {
+          console.log(d);
+          this.creerAbonnement(d.body.id, abonnement.id, this.client.user_id);
+      });
+  }
+
+  creerAbonnement(paiements_id, type_abonnements_id, user_id ) {
+      const opt = {
+        paiements_id,
+        type_abonnements_id,
+        user_id,
+        statut: 'active'
+      };
+      this.api.Abonnements.post(opt).subscribe((d: any) => {
+          console.log(d);
+      });
   }
 
   verification(nom, montant, code_transaction) {
@@ -215,15 +257,16 @@ export class AbonnementPage implements OnInit {
               alert(err.error.text);
           });
   }
-    //https://www.my-dohone.com/dohone-sandbox/pay?cmd=cfrmsms&rCS=H1317&rT=682000316
-  confirmationVirement(code){
+    // https://www.my-dohone.com/dohone-sandbox/pay?cmd=cfrmsms&rCS=H1317&rT=682000316
+  confirmationVirement(code, abonnement){
       this.http.get(this.url_sandbox + 'pay?cmd=cfrmsms&rCS=' + code + '&rT=' + this.telephone)
           .subscribe((res: any) => {
               console.log(res);
           }, err => {
               console.log(err);
               if (err.statusText === 'OK') {
-                  //
+                  // paiement confirmé, creation du paiement et de l'abonnement
+                  this.creerPaiement(err.text, 'dohone', abonnement);
               } else {
                   // echec
                   alert(err.error.text);

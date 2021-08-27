@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons>
-      <ion-back-button defaultHref="/" text="" color="light"></ion-back-button>
+      <ion-back-button defaultHref="/" text="" color="dark"></ion-back-button>
     </ion-buttons>
     <ion-title>Nouveau compte</ion-title>
   </ion-toolbar>
@@ -14,7 +14,7 @@
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
             <ion-label>
-              <ion-icon name="person" color="light"></ion-icon>
+              <ion-icon name="person" color="dark"></ion-icon>
             </ion-label>
             <ion-input type="text" placeholder="Prénom" [formControl]="signupForm.controls['first_name']">
             </ion-input>
@@ -28,7 +28,7 @@
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
             <ion-label>
-              <ion-icon name="person" color="light"></ion-icon>
+              <ion-icon name="person" color="dark"></ion-icon>
             </ion-label>
             <ion-input type="text" placeholder="Nom" [formControl]="signupForm.controls['last_name']">
             </ion-input>
@@ -42,7 +42,7 @@
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
             <ion-label>
-              <ion-icon name="call" color="light"></ion-icon>
+              <ion-icon name="call" color="dark"></ion-icon>
             </ion-label>
             <ion-input type="tel" placeholder="Téléphone" minlength="9" maxlength="9"
                        [formControl]="signupForm.controls['phone']"></ion-input>
@@ -55,7 +55,7 @@
       <ion-row>
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
-            <ion-label style="overflow: visible;"><ion-icon name="male-female-outline" color="light"></ion-icon></ion-label>
+            <ion-label style="overflow: visible;"><ion-icon name="male-female-outline" color="dark"></ion-icon></ion-label>
             <ion-select placeholder="Genre" interface="popover" [formControl]="signupForm.controls['genre']">
               <ion-select-option value="Femme">Femme</ion-select-option>
               <ion-select-option value="Homme">Homme</ion-select-option>
@@ -70,7 +70,7 @@
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
             <ion-label>
-              <ion-icon name="mail" color="light"></ion-icon>
+              <ion-icon name="mail" color="dark"></ion-icon>
             </ion-label>
             <ion-input type="email" placeholder="Email" [formControl]="signupForm.controls['email']"></ion-input>
           </ion-item>
@@ -83,7 +83,7 @@
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
             <ion-label>
-              <ion-icon name="lock-closed" color="light"></ion-icon>
+              <ion-icon name="lock-closed" color="dark"></ion-icon>
             </ion-label>
             <ion-input type="password" placeholder="Mot de passe" ngModel name="password" clearOnEdit="false"
               [formControl]="signupForm.controls['password']"></ion-input>
@@ -97,7 +97,7 @@
         <ion-col size-xl="6" offset-xl="3">
           <ion-item lines="none">
             <ion-label>
-              <ion-icon name="lock-closed" color="light"></ion-icon>
+              <ion-icon name="lock-closed" color="dark"></ion-icon>
             </ion-label>
             <ion-input type="password" placeholder="Confirmer mot de passe" clearOnEdit="false"
               [formControl]="signupForm.controls['confirm_password']"></ion-input>

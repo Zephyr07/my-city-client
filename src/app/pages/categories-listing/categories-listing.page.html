@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text class="ion-text-wrap">{{nom}}</ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="categories.length > 0">
+    <ion-item *ngFor="let o of categories" (click)="openOffreByCategories(o)">
+      {{ o.nom | titlecase}}
+    </ion-item>
+  </ion-list>
+</ion-content>

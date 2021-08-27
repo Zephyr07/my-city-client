@@ -14,7 +14,7 @@ export class SearchPage implements OnInit {
   private searchTerm = '';
   private searchControl: FormControl;
   private searching: any = false;
-  private sous_categories: any = [];
+  private categories: any = [];
   private marques: any = [];
   private offres: any = [];
   private entreprises: any = [];
@@ -36,14 +36,14 @@ export class SearchPage implements OnInit {
   onSearchInput() {
     if (this.searchTerm.length >= 3) {
       this.searching = true;
-      this.getSousCategoriesByNom();
+      this.getCategoriesByNom();
       this.getEntrepriseByNom();
       this.getTypeEntrepriseByNom();
       this.getMarqueByNom();
       this.getOffreByNom();
     } else {
       this.searching = false;
-      this.sous_categories = [];
+      this.categories = [];
       this.marques = [];
       this.offres = [];
       this.entreprises = [];
@@ -69,9 +69,9 @@ export class SearchPage implements OnInit {
     this.router.navigateByUrl('offre-listing', navigationExtra);
   }
 
-  openOffreBySousCategories(subPage){
+  openOffreByCategories(subPage){
     this.dismiss();
-    const  navigationExtra: NavigationExtras = { state: {sous_categories: {nom: subPage.nom, id: subPage.id}}};
+    const  navigationExtra: NavigationExtras = { state: {categories: {nom: subPage.nom, id: subPage.id}}};
     this.router.navigate(['offre-listing'], navigationExtra);
   }
 
@@ -87,7 +87,7 @@ export class SearchPage implements OnInit {
     this.router.navigateByUrl('entreprise-listing', navigationExtra);
   }
 
-  getSousCategoriesByNom(){
+  getCategoriesByNom(){
     if (this.searchTerm.length >= 3) {
       const opt = {
         'nom-lk': this.searchTerm,
@@ -97,8 +97,8 @@ export class SearchPage implements OnInit {
         should_paginate: false,
       };
 
-      this.api.SousCategories.getList(opt).subscribe(d => {
-        this.sous_categories = d;
+      this.api.Categories.getList(opt).subscribe(d => {
+        this.categories = d;
         this.searching = false;
       }, e => {
         console.log(e);

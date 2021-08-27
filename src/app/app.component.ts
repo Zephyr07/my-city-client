@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   private client = {
     nom: ''
   };
-  private selectedMenu: any;
 
   public appPages = [
     {
@@ -35,8 +34,6 @@ export class AppComponent implements OnInit {
       icon: 'person-outline'
     }
   ];
-
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
@@ -80,12 +77,11 @@ export class AppComponent implements OnInit {
 
   getCategories(){
     const opt = {
+      parent_id: 999999999,
       should_paginate: false,
       _sort: 'nom',
-      _sortDir: 'asc',
-      _includes: 'sous_categories'
+      _sortDir: 'asc'
     };
-
     this.api.Categories.getList(opt).subscribe((d: any) => {
       this.categories = d;
     }, err => {
@@ -97,27 +93,10 @@ export class AppComponent implements OnInit {
     this.isUserEnabled = !this.isUserEnabled;
   }
 
-  openPage(page, index) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    if (page.component) {
-
-      this.router.navigate(page.component);
-      this.menuCtrl.close();
-    } else {
-      if (this.selectedMenu === index) {
-        this.selectedMenu = -1;
-
-      } else {
-        this.selectedMenu = index;
-
-      }
-    }
-  }
-   openSubPage(subPage){
+   openCategories(subPage){
      this.menuCtrl.close();
-     const  navigationExtra: NavigationExtras = { state: {sous_categories: subPage}};
-     this.router.navigate(['offre-listing'], navigationExtra);
+     const  navigationExtra: NavigationExtras = { state: {id: subPage.id, nom: subPage.nom}};
+     this.router.navigate(['categories-listing'], navigationExtra);
    }
 
    home(){

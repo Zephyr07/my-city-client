@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 })
 export class OffreListingPage implements OnInit {
 
-    private sous_categories: any;
+    private categories: any;
     private marque: any;
     private allOffres: any = [];
     private activeTab: any;
@@ -28,12 +28,12 @@ export class OffreListingPage implements OnInit {
         this.route.queryParams.subscribe(params => {
             if (this.router.getCurrentNavigation().extras.state) {
                 const state = this.router.getCurrentNavigation().extras.state;
-                if (state.sous_categories){
-                    this.sous_categories = this.router.getCurrentNavigation().extras.state.sous_categories;
-                    const encoded = this.sous_categories.nom;
+                if (state.categories){
+                    this.categories = this.router.getCurrentNavigation().extras.state.categories;
+                    const encoded = this.categories.nom;
                     const decoded = encoded.replace(/&amp;/g, '&');
-                    this.sous_categories.nom = decoded;
-                    this.getOffresBySousCategories();
+                    this.categories.nom = decoded;
+                    this.getOffresByCategories();
                 } else if (state.marque) {
                     this.getOffresByMarque(state.marque.id);
                     const encoded = state.marque.nom;
@@ -49,11 +49,11 @@ export class OffreListingPage implements OnInit {
     }
 
     async openOffrePrix(title, id) {
-        const navigationExtra: NavigationExtras = { state: { prix: { nom: title, id: id} } };
+        const navigationExtra: NavigationExtras = { state: { prix: { nom: title, id} } };
         this.router.navigateByUrl('offre-prix', navigationExtra);
     }
 
-    async openSousCategories() {
+    async openCategories() {
         const modal = await this.modalCtrl.create({
             component: CategoriesPage,
             cssClass: 'my-custom-class',
@@ -62,9 +62,9 @@ export class OffreListingPage implements OnInit {
         modal.onDidDismiss()
             .then((data) => {
                 if (data.role !== undefined) {
-                    this.sous_categories = data.role;
+                    this.categories = data.role;
                 }
-                this.getOffresBySousCategories();
+                this.getOffresByCategories();
             });
         return await modal.present();
     }
@@ -79,14 +79,14 @@ export class OffreListingPage implements OnInit {
         }
     }
 
-    async getOffresBySousCategories() {
+    async getOffresByCategories() {
         const loading = await this.loadingCtrl.create({
             message: 'Chargement...'
         });
         loading.present();
 
         const opt = {
-            sous_categories_id: this.sous_categories.id,
+            categories_id: this.categories.id,
             should_paginate: false,
             _includes: 'prix_offres,note_offres.notes',
             statut : 'active'

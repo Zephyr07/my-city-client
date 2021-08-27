@@ -1,17 +1,17 @@
 ion-content {
-  --background: var(--ion-color-secondary);
+  --background: var(--ion-color-primary);
   background-size: 100% 100%;
 
   ion-item {
-    --background: var(--ion-color-secondary);
-    border: 1px solid var(--ion-color-light);
+    --background: var(--ion-color-light);
+    border: 1px solid var(--ion-color-primary);
     ion-select {
       min-width: 100%;
-      color: var(--ion-color-white);
+      color: var(--ion-color-dark);
       font-weight: 500;
     }
     ion-input {
-      color: var(--ion-color-white);
+      color: var(--ion-color-dark);
       font-weight: 500;
     }
   }

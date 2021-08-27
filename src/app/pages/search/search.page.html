@@ -32,9 +32,9 @@
     </ion-item>
   </ion-list>
 
-  <ion-list *ngIf="sous_categories.length > 0">
-    <h5 class="ion-padding-start">Sous-catégories</h5>
-    <ion-item *ngFor="let o of sous_categories" (click)="openOffreBySousCategories(o)">
+  <ion-list *ngIf="categories.length > 0">
+    <h5 class="ion-padding-start">Catégories</h5>
+    <ion-item *ngFor="let o of categories" (click)="openOffreByCategories(o)">
       {{ o.nom | titlecase}}
     </ion-item>
   </ion-list>

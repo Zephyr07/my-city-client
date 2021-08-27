@@ -40,23 +40,13 @@
                         </ion-col>
                     </ion-row>
                   </ion-item>
-                <ion-item *ngFor="let p of categories;  let i=index" (click)="openPage(p, i);" lines="none">
+                <ion-item *ngFor="let p of categories;  let i=index" (click)="openCategories(p);" lines="none">
                     <ion-row class="ion-padding-top parentRow">
                       <!-- Parent Pages  -->
                       <ion-col class="menu-name">
                           <ion-text class="categoryText">
                           <span >{{p.nom | titlecase}}</span>
-                          <ion-icon [name]="selectedMenu == i? 'arrow-down' : 'arrow-forward'"></ion-icon>
                         </ion-text>
-                       
-                        <!-- Child Pages  -->
-                        <ion-list [hidden]="selectedMenu != i" class="ion-no-margin ion-no-padding ion-padding-top"> 
-                          <ion-item *ngFor="let subPage of p.sous_categories;let i2=index" class="ion-text-wrap" (click)="openSubPage(subPage)" lines="none">
-                            <ion-row>
-                              <ion-col class="menu-name"><ion-text color="medium" [innerHTML]="subPage.nom">&nbsp;</ion-text></ion-col>
-                            </ion-row>
-                          </ion-item>
-                        </ion-list>
                       </ion-col>
                     </ion-row>
                   </ion-item>
